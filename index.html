@@ -32,10 +32,11 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-b
 #comboBar.fever #comboFill{background:linear-gradient(90deg,#ff5a5a,#ffb13d,#ffe14c)}
 #quip{max-width:100%;text-align:center;font-size:calc(15 * var(--u));font-weight:700;background:rgba(255,255,255,.14);padding:calc(6 * var(--u)) calc(12 * var(--u));border-radius:calc(12 * var(--u));opacity:0;transition:opacity .25s;text-shadow:0 1px 0 rgba(0,0,0,.4)}
 #quip.on{opacity:1}
-#tools{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--sab) + 10 * var(--u));display:flex;gap:calc(10 * var(--u));pointer-events:none}
-.tool{position:relative;width:max(52px,calc(62 * var(--u)));height:max(52px,calc(62 * var(--u)));border-radius:calc(16 * var(--u));border:calc(3 * var(--u)) solid rgba(255,255,255,.18);background:rgba(36,22,54,.78);color:#fff;font-size:calc(28 * var(--u));pointer-events:auto;padding:0;cursor:pointer;touch-action:manipulation}
+#tools{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--sab) + 10 * var(--u));display:flex;gap:calc(6 * var(--u));pointer-events:none}
+.tool{position:relative;width:max(48px,min(calc(54 * var(--u)),calc((100vw - 52px) / 6)));height:max(48px,min(calc(54 * var(--u)),calc((100vw - 52px) / 6)));border-radius:calc(16 * var(--u));border:calc(3 * var(--u)) solid rgba(255,255,255,.18);background:rgba(36,22,54,.78);color:#fff;font-size:calc(28 * var(--u));pointer-events:auto;padding:0;cursor:pointer;touch-action:manipulation}
 .tool.on{border-color:#ffe14c;background:rgba(120,84,220,.9);box-shadow:0 0 calc(14 * var(--u)) rgba(255,225,76,.6)}
 .tool.broken{opacity:.45;filter:grayscale(1)}
+.tool.lock{opacity:.5;filter:grayscale(.85)}
 .tool .key{position:absolute;left:calc(4 * var(--u));top:calc(2 * var(--u));font-size:calc(11 * var(--u));opacity:.7;font-weight:800}
 .tool .lv{position:absolute;right:calc(4 * var(--u));top:calc(2 * var(--u));font-size:calc(11 * var(--u));font-weight:900;color:#ffe14c}
 .tool .dur{position:absolute;left:calc(6 * var(--u));right:calc(6 * var(--u));bottom:calc(4 * var(--u));height:calc(5 * var(--u));background:rgba(0,0,0,.5);border-radius:9px;overflow:hidden}
@@ -46,7 +47,7 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-b
 #btnNext.on{display:block}
 @media (orientation:landscape){
 #toasts{left:auto;right:calc(var(--sar) + 90 * var(--u));transform:none;top:calc(var(--sat) + 70 * var(--u));width:calc(280 * var(--u))}
-#tools{left:auto;right:calc(var(--sar) + 10 * var(--u));bottom:calc(var(--sab) + 10 * var(--u));transform:none;flex-direction:column}
+#tools{left:auto;right:calc(var(--sar) + 10 * var(--u));bottom:calc(var(--sab) + 10 * var(--u));transform:none;display:grid;grid-template-columns:repeat(2,auto)}
 #joy{bottom:calc(var(--sab) + 14 * var(--u))}
 #btnNext{bottom:calc(var(--sab) + 14 * var(--u))}
 #midInfo{top:calc(var(--sat) + 54 * var(--u))}
@@ -141,6 +142,49 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-b
 .dbg button{font:inherit;font-size:11px;min-height:26px;padding:0 6px;border-radius:6px;border:0;background:#3a2f5c;color:#fff;touch-action:manipulation}
 #app.oh #tools{left:auto;right:calc(var(--sar) + 10 * var(--u));bottom:calc(var(--sab) + 10 * var(--u));transform:none;flex-direction:column-reverse}
 #app.oh #btnNext{left:auto;right:calc(var(--sar) + 90 * var(--u));transform:none}
+.screen.cv,.screen.hub,#scrSlots{justify-content:space-between;background:radial-gradient(ellipse at 50% 48%,rgba(20,10,34,0) 0 30%,rgba(14,8,24,.5) 64%,rgba(10,5,18,.88) 100%),linear-gradient(180deg,rgba(14,8,24,.8) 0,rgba(14,8,24,0) 32%,rgba(14,8,24,0) 62%,rgba(14,8,24,.82) 100%)}
+.cv-top{display:flex;flex-direction:column;align-items:center;gap:calc(10 * var(--u));text-align:center}
+.eyebrow{font-size:calc(12 * var(--u));letter-spacing:.55em;font-weight:800;color:#ffd9a0;opacity:.92;padding-left:.55em}
+.screen .cv-logo{font-size:calc(62 * var(--u));font-weight:900;margin:0;line-height:1.05;letter-spacing:-.03em;text-shadow:none;background:linear-gradient(180deg,#fff8e0 0%,#ffd27a 48%,#ff8fa8 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 calc(5 * var(--u)) 0 rgba(60,20,50,.55)) drop-shadow(0 0 calc(22 * var(--u)) rgba(255,160,120,.32))}
+.cv-rule{display:flex;align-items:center;gap:calc(10 * var(--u));width:min(70%,calc(260 * var(--u)))}
+.cv-rule::before,.cv-rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(255,217,160,.75))}
+.cv-rule::after{transform:scaleX(-1)}
+.cv-rule i{width:calc(7 * var(--u));height:calc(7 * var(--u));background:#ffd9a0;transform:rotate(45deg);flex:none}
+.screen .cv-tag{font-size:calc(14 * var(--u));opacity:.85;max-width:calc(340 * var(--u));letter-spacing:.01em;text-wrap:balance;word-break:keep-all}
+.cv-bot{display:flex;flex-direction:column;align-items:center;gap:calc(12 * var(--u))}
+.cv-go{min-width:min(76vw,calc(300 * var(--u)))}
+.cv-ver{font-size:calc(11 * var(--u));opacity:.5;letter-spacing:.25em}
+.hub-top{display:flex;justify-content:space-between;align-items:center;gap:calc(8 * var(--u));width:100%}
+.hub-dock{display:flex;flex-direction:column;align-items:center;gap:calc(10 * var(--u));padding:calc(14 * var(--u));border-radius:calc(22 * var(--u));background:rgba(24,12,38,.64);border:1px solid rgba(255,217,160,.2);width:min(100%,calc(460 * var(--u)))}
+#scrSlots{justify-content:center}
+#slotList{display:flex;flex-direction:column;gap:calc(10 * var(--u));width:min(100%,calc(480 * var(--u)))}
+.slot{display:flex;gap:calc(8 * var(--u));align-items:stretch}
+.slotmain{flex:1;text-align:left;min-height:max(64px,calc(78 * var(--u)));border-radius:calc(16 * var(--u));border:calc(2 * var(--u)) solid rgba(255,217,160,.4);background:linear-gradient(135deg,rgba(64,42,104,.94),rgba(34,20,52,.94));color:#fff;font:inherit;padding:calc(8 * var(--u)) calc(14 * var(--u));display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"n l d" "n s s";column-gap:calc(14 * var(--u));row-gap:calc(2 * var(--u));align-items:center;cursor:pointer}
+.slot.empty .slotmain{border-style:dashed;background:rgba(34,20,52,.7)}
+.slotmain:active{transform:translateY(calc(2 * var(--u)))}
+.slotmain .sn{grid-area:n;font-size:calc(34 * var(--u));font-weight:900;color:#ffd27a;width:calc(40 * var(--u));text-align:center}
+.slotmain .sl{grid-area:l;font-size:calc(17 * var(--u));font-weight:800}
+.slotmain .ss{grid-area:s;font-size:calc(13 * var(--u));opacity:.8}
+.slotmain .sd{grid-area:d;font-size:calc(11 * var(--u));opacity:.6}
+.slotdel{align-self:center}
+#mBtns.many{display:grid;grid-template-columns:1fr 1fr}
+.ordline{margin-top:calc(8 * var(--u));font-size:calc(14 * var(--u));font-weight:800;background:rgba(255,255,255,.08);border-radius:calc(10 * var(--u));padding:calc(6 * var(--u)) calc(12 * var(--u));text-align:center}
+@media (orientation:landscape){
+.screen .cv-logo{font-size:calc(44 * var(--u))}
+.screen.cv{flex-direction:row;align-items:center}
+.screen.cv .cv-top{align-items:flex-start;text-align:left;flex:1}
+.screen.cv .cv-bot{flex:1;align-items:flex-end}
+.screen.cv .cv-rule{width:calc(220 * var(--u))}
+.screen.cv .cv-go{min-width:calc(240 * var(--u))}
+.screen.hub{flex-direction:row;align-items:flex-end}
+.screen.hub .hub-top{flex-direction:column;align-items:flex-start;align-self:flex-start;width:auto}
+.screen.hub .hub-dock{width:min(48%,calc(400 * var(--u)))}
+}
+@media (orientation:landscape) and (max-height:480px){
+#slotList{gap:calc(6 * var(--u))}
+.slotmain{min-height:max(54px,calc(60 * var(--u)));padding:calc(4 * var(--u)) calc(12 * var(--u))}
+.slhint{display:none}
+}
 </style>
 </head>
 <body>
@@ -166,9 +210,11 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-b
 <div id="tools"></div>
 <button class="btn hot" id="btnNext" data-i18n="next">다음 볼</button>
 </div>
-<div class="screen" id="scrIntro"><div class="logo">🕯️</div><h1 data-i18n="title">왁스볼 공장</h1><p data-i18n="skipHint"></p></div>
-<div class="screen" id="scrTitle"><h1 data-i18n="title">왁스볼 공장</h1><p data-i18n="tag"></p><div class="row"><button class="btn hot big" id="btnStart" data-i18n="start">출근하기</button></div><div class="row"><button class="btn" id="btnBoss" data-i18n="bossBtn"></button><button class="btn alt" id="btnWork" data-i18n="workshop"></button><button class="btn alt" id="btnDexT" data-i18n="dex"></button></div><div class="row"><button class="btn hot pulse" id="btnDaily" data-i18n="daily"></button></div><div class="row"><button class="btn alt" id="btnSet" data-i18n="settingsBtn"></button><button class="btn alt sq" id="btnKeys" aria-label="shortcuts">⌨</button></div></div>
-<div class="screen" id="scrPause"><h2 data-i18n="pause">일시정지</h2><div class="row"><button class="btn" id="btnResume" data-i18n="resume">계속하기</button></div><div class="row"><button class="btn alt" id="btnPSet" data-i18n="settingsBtn"></button><button class="btn alt" id="btnPPhoto" data-i18n="photo"></button><button class="btn alt sq" id="btnPKeys" aria-label="shortcuts">⌨</button></div><div class="row"><button class="btn alt" id="btnQuit" data-i18n="quit">타이틀로</button></div></div>
+<div class="screen" id="scrIntro"><div class="cv-top"><div class="eyebrow">WAX BALL FACTORY</div><h1 class="cv-logo" data-i18n="title">왁스볼 공장</h1><div class="cv-rule"><i></i></div></div><p data-i18n="skipHint"></p></div>
+<div class="screen cv" id="scrCover"><div class="cv-top"><div class="eyebrow">WAX BALL FACTORY</div><h1 class="cv-logo" data-i18n="title">왁스볼 공장</h1><div class="cv-rule"><i></i></div><p class="cv-tag" data-i18n="tag"></p></div><div class="cv-bot"><button class="btn hot big cv-go" id="btnPlay" data-i18n="play">게임 시작</button><div class="row"><button class="btn alt" id="btnCSet" data-i18n="settingsBtn"></button><button class="btn alt sq" id="btnCKeys" aria-label="shortcuts">⌨</button></div><div class="cv-ver">v1.1</div></div></div>
+<div class="screen" id="scrSlots"><h2 data-i18n="slotTitle"></h2><p class="slhint" data-i18n="slotHint"></p><div id="slotList"></div><div class="row"><button class="btn alt" id="btnSlotBack" data-i18n="back"></button></div></div>
+<div class="screen hub" id="scrTitle"><div class="hub-top"><div class="chip" id="hubInfo"></div><button class="btn alt" id="btnSlots" data-i18n="slotChange"></button></div><div class="hub-dock"><div class="row"><button class="btn hot big" id="btnStart" data-i18n="start">출근하기</button></div><div class="row"><button class="btn" id="btnBoss" data-i18n="bossBtn"></button><button class="btn alt" id="btnWork" data-i18n="workshop"></button><button class="btn alt" id="btnDexT" data-i18n="dex"></button></div><div class="row"><button class="btn hot pulse" id="btnDaily" data-i18n="daily"></button><button class="btn alt" id="btnSet" data-i18n="settingsBtn"></button><button class="btn alt sq" id="btnKeys" aria-label="shortcuts">⌨</button></div></div></div>
+<div class="screen" id="scrPause"><h2 data-i18n="pause">일시정지</h2><p class="dim" id="orderTxt"></p><div class="row"><button class="btn" id="btnResume" data-i18n="resume">계속하기</button></div><div class="row"><button class="btn alt" id="btnPSet" data-i18n="settingsBtn"></button><button class="btn alt" id="btnPPhoto" data-i18n="photo"></button><button class="btn alt sq" id="btnPKeys" aria-label="shortcuts">⌨</button></div><div class="row"><button class="btn alt" id="btnQuit" data-i18n="quit">타이틀로</button></div></div>
 <div class="screen" id="scrResult"><h2 data-i18n="result">정산</h2><div id="resultTxt"></div><div class="row"><button class="btn hot" id="btnAgain" data-i18n="again">한 판 더</button><button class="btn alt" id="btnResWork" data-i18n="workshop"></button><button class="btn alt" id="btnToTitle" data-i18n="quit">타이틀로</button></div></div>
 <div class="screen" id="scrMenu"><div class="panel"><div class="phead"><b data-i18n="workshop"></b><span class="chip">🪙 <span id="menuGold">0</span></span><button class="btn alt sq" id="menuClose">✕</button></div><div class="row" id="menuTabs"></div><div id="menuBody"></div></div></div>
 <div class="screen" id="scrError"><h2 id="errTitle">앗, 공장 기계가 멈췄어 ㅋㅋ</h2><p id="errTxt"></p><div class="row"><button class="btn hot" id="btnRestart">다시 시작</button></div></div>
@@ -187,6 +233,11 @@ import * as THREE from './three.module.min.js';
 const CONFIG={
 version:1,
 saveKey:'waxfactory.save',
+settingsKey:'waxfactory.settings',
+slots:3,
+dexMax:80,
+roomMax:5,
+bossMax:5,
 dtMax:0.05,
 step:1/60,
 maxSteps:4,
@@ -203,10 +254,12 @@ tools:{
 hand:{dmg:1,cd:0.11,splash:0,deb:[7,0.55],spd:2.4,shake:0.18,vib:[10],gain:5,power:2.4,icon:'✋',dur:0},
 hammer:{dmg:2.1,cd:0.45,splash:0.5,deb:[15,1],spd:4.2,shake:0.85,vib:[40],gain:14,power:5,icon:'🔨',dur:26},
 tweezers:{dmg:1,cd:0.17,splash:0,peel:true,deb:[4,0.8],spd:2,shake:0.12,vib:[6],gain:7,power:1.8,icon:'🥢',dur:48},
-drill:{dmg:0.36,cd:0.07,splash:0,hold:true,deb:[2,0.3],spd:1.6,shake:0.1,vib:[5],gain:1.6,power:1.4,icon:'🪛',dur:220}
+drill:{dmg:0.36,cd:0.07,splash:0,hold:true,deb:[2,0.3],spd:1.6,shake:0.1,vib:[5],gain:1.6,power:1.4,icon:'🪛',dur:220},
+chisel:{dmg:3.4,cd:0.55,splash:0,deb:[11,0.9],spd:3.6,shake:0.6,vib:[28],gain:12,power:6,icon:'⛏️',dur:20,lv:4},
+torch:{dmg:0.62,cd:0.09,splash:0.4,hold:true,deb:[3,0.35],spd:1.4,shake:0.1,vib:[4],gain:1.8,power:1.2,icon:'🔥',dur:150,lv:7}
 },
-toolOrder:['hand','hammer','tweezers','drill'],
-upgrade:{dmgPerLv:0.22,maxLv:5},
+toolOrder:['hand','hammer','tweezers','drill','chisel','torch'],
+upgrade:{dmgPerLv:0.22,maxLv:7},
 combo:{window:1.3,decay:16,fever:5,feverDmg:1.5,feverGold:2,goldPerStack:0.04,maxStack:50},
 slowmo:{scale:0.25,time:1.5},
 reveal:{rotate:3.4,zoom:0.72,auto:5},
@@ -228,7 +281,7 @@ const S={master:80,bgm:60,sfx:85,vibration:true,quality:'auto',fps:'auto',res:10
 
 const I18N={
 ko:{title:'왁스볼 공장',tag:'부수고 · 까고 · 뭐 나오나 구경하는 힐링 공장 ㅋㅋ',start:'출근하기',resume:'계속하기',pause:'일시정지',quit:'타이틀로',result:'정산',again:'한 판 더',next:'다음 볼',resultLine:'이번 판 골드',ballWord:'볼'},
-en:{title:'Wax Ball Factory',tag:'Smash it, peel it, see what pops out. Pure chill lol',start:'Clock in',resume:'Resume',pause:'Paused',quit:'To title',result:'Payday',again:'One more',next:'Next ball',resultLine:'Gold this run',ballWord:'Ball'}
+en:{title:'Wax Ball Factory',tag:'Smash it, peel it, see what pops out. Pure chill',start:'Clock in',resume:'Resume',pause:'Paused',quit:'To title',result:'Payday',again:'One more',next:'Next ball',resultLine:'Gold this run',ballWord:'Ball'}
 };
 const t=k=>(I18N[S.lang]&&I18N[S.lang][k])||I18N.ko[k]||k;
 function applyLang(){document.documentElement.lang=S.lang;const els=document.querySelectorAll('[data-i18n]');for(let i=0;i<els.length;i++){els[i].textContent=t(els[i].getAttribute('data-i18n'))}}
@@ -238,10 +291,11 @@ const KEYCODE=/^(Key[A-Z]|Digit\d|Numpad\d|Arrow(Left|Right|Up|Down)|Space|Enter
 const DEFAULT_KEYS=JSON.parse(JSON.stringify(S.keys));
 const isNum=v=>typeof v==='number'&&isFinite(v);
 const numIn=(v,a,b,d)=>isNum(v)?clamp(v,a,b):d;
-function defaultSave(){return{v:CONFIG.version,gold:0,xp:0,tools:{hand:1,hammer:1,tweezers:1,drill:1},dex:{},ach:{},rooms:{own:[1,0,0],cur:0},stats:{rounds:0,balls:0,hits:0,pieces:0,bosses:[0,0,0],ads:0},daily:{last:'',streak:0},firstWin:false,s:null}}
-let memStore=null,storageOK=true;
-function storeGet(){try{return window.localStorage.getItem(CONFIG.saveKey)}catch(e){storageOK=false;return memStore}}
-function storeSet(v){memStore=v;try{window.localStorage.setItem(CONFIG.saveKey,v)}catch(e){storageOK=false}}
+function defaultSave(){const own=[],bs=[];for(let i=0;i<CONFIG.roomMax;i++)own.push(i===0?1:0);for(let i=0;i<CONFIG.bossMax;i++)bs.push(0);return{v:CONFIG.version,gold:0,xp:0,ts:0,tools:{hand:1,hammer:1,tweezers:1,drill:1,chisel:1,torch:1},dex:{},ach:{},rooms:{own,cur:0},stats:{rounds:0,balls:0,hits:0,pieces:0,bosses:bs,ads:0,orders:0},daily:{last:'',streak:0},firstWin:false,s:null}}
+const memStore={};let storageOK=true;
+function storeGet(k){try{return window.localStorage.getItem(k)}catch(e){storageOK=false;return memStore[k]||null}}
+function storeSet(k,v){memStore[k]=v;try{window.localStorage.setItem(k,v)}catch(e){storageOK=false}}
+function storeDel(k){delete memStore[k];try{window.localStorage.removeItem(k)}catch(e){storageOK=false}}
 function applySettings(o){
 if(!o||typeof o!=='object')return;
 for(const k in SCHEMA){
@@ -265,33 +319,39 @@ const d=defaultSave();
 if(!o||typeof o!=='object'||o.v!==CONFIG.version)return null;
 d.gold=Math.floor(numIn(o.gold,0,1e9,0));
 d.xp=Math.floor(numIn(o.xp,0,1e8,0));
+d.ts=numIn(o.ts,0,4e12,0);
 if(o.tools&&typeof o.tools==='object')for(const k in d.tools)d.tools[k]=Math.round(numIn(o.tools[k],1,CONFIG.upgrade.maxLv,1));
-if(o.dex&&typeof o.dex==='object')for(let i=0;i<40;i++){const v=o.dex[i];if(isNum(v)&&v>0)d.dex[i]=Math.min(9999,Math.floor(v))}
+if(o.dex&&typeof o.dex==='object')for(let i=0;i<CONFIG.dexMax;i++){const v=o.dex[i];if(isNum(v)&&v>0)d.dex[i]=Math.min(9999,Math.floor(v))}
 if(o.ach&&typeof o.ach==='object')for(const k in o.ach)if(o.ach[k]===true&&/^[a-z0-9_]{1,20}$/.test(k))d.ach[k]=true;
-if(o.rooms&&Array.isArray(o.rooms.own)){for(let i=0;i<3;i++)d.rooms.own[i]=i===0?1:(o.rooms.own[i]?1:0);const c=Math.round(numIn(o.rooms.cur,0,2,0));d.rooms.cur=d.rooms.own[c]?c:0}
-if(o.stats&&typeof o.stats==='object'){for(const k of ['rounds','balls','hits','pieces','ads'])d.stats[k]=Math.floor(numIn(o.stats[k],0,1e9,0));if(Array.isArray(o.stats.bosses))for(let i=0;i<3;i++)d.stats.bosses[i]=Math.floor(numIn(o.stats.bosses[i],0,1e6,0))}
+if(o.rooms&&Array.isArray(o.rooms.own)){for(let i=0;i<CONFIG.roomMax;i++)d.rooms.own[i]=i===0?1:(o.rooms.own[i]?1:0);const c=Math.round(numIn(o.rooms.cur,0,CONFIG.roomMax-1,0));d.rooms.cur=d.rooms.own[c]?c:0}
+if(o.stats&&typeof o.stats==='object'){for(const k of ['rounds','balls','hits','pieces','ads','orders'])d.stats[k]=Math.floor(numIn(o.stats[k],0,1e9,0));if(Array.isArray(o.stats.bosses))for(let i=0;i<CONFIG.bossMax;i++)d.stats.bosses[i]=Math.floor(numIn(o.stats.bosses[i],0,1e6,0))}
 if(o.daily&&typeof o.daily==='object'){d.daily.last=typeof o.daily.last==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(o.daily.last)?o.daily.last:'';d.daily.streak=Math.floor(numIn(o.daily.streak,0,9999,0))}
 d.firstWin=o.firstWin===true;
 d.s=o.s&&typeof o.s==='object'?o.s:null;
 return d;
 }
-let saveCorrupt=false;
-function loadSave(){
-const raw=storeGet();
-if(!raw)return defaultSave();
-try{
-const d=sanitizeSave(JSON.parse(raw));
-if(d)return d;
-}catch(e){}
-saveCorrupt=true;
-return defaultSave();
+let saveCorrupt=false,curSlot=0;
+const slotKey=n=>CONFIG.saveKey+'.slot'+n;
+function migrateLegacy(){
+const old=storeGet(CONFIG.saveKey);
+if(!old)return;
+if(!storeGet(slotKey(1)))storeSet(slotKey(1),old);
+if(!storeGet(CONFIG.settingsKey)){try{const o=JSON.parse(old);if(o&&o.s)storeSet(CONFIG.settingsKey,JSON.stringify(o.s))}catch(e){}}
+storeDel(CONFIG.saveKey);
 }
-const save=loadSave();
+function readSlot(n){
+const raw=storeGet(slotKey(n));
+if(!raw)return{empty:true};
+try{const d=sanitizeSave(JSON.parse(raw));if(d)return{d}}catch(e){}
+return{bad:true};
+}
+migrateLegacy();
+const save=defaultSave();
 const S_DEFAULT=JSON.parse(JSON.stringify(S));
-applySettings(save.s);
+{const raw=storeGet(CONFIG.settingsKey);if(raw){try{applySettings(JSON.parse(raw))}catch(e){}}}
 let saveTimer=0;
 function settingsSnap(){const o={keys:S.keys};for(const k in SCHEMA)o[k]=S[k];return o}
-function persistNow(){saveTimer=0;save.s=settingsSnap();try{storeSet(JSON.stringify(save))}catch(e){}}
+function persistNow(){saveTimer=0;try{storeSet(CONFIG.settingsKey,JSON.stringify(settingsSnap()));if(curSlot>0){save.ts=Date.now();save.s=null;storeSet(slotKey(curSlot),JSON.stringify(save))}}catch(e){}}
 function persist(){if(!saveTimer)saveTimer=setTimeout(persistNow,350)}
 window.addEventListener('pagehide',()=>{if(saveTimer){clearTimeout(saveTimer);persistNow()}});
 const xpNeed=l=>50+l*45;
@@ -299,7 +359,7 @@ function levelInfo(){let x=save.xp,l=1;while(l<99&&x>=xpNeed(l)){x-=xpNeed(l);l+
 
 const QUIP={
 ko:{start:['자, 오늘도 왁스 부수러 출근했냐 ㅋㅋ','공장장 왔다. 근데 일은 네가 해 ㅋㅋ'],first:['오 첫 타격부터 손맛 좋은데? ㅋㅋ','벌써 금 갔다 ㅋㅋ 소질 있네'],combo:['콤보 이어진다 ㅋㅋ 멈추면 죽는다','손가락 안 아프냐? 계속 해 ㅋㅋ'],fever:['피버 타임! 다 부숴 ㅋㅋㅋ'],broken:['앗 도구가 부러졌네 ㅋㅋ 싸게 샀나?'],clear:['마지막 조각이다… 숨 참아 ㅋㅋ'],idle:['안 부수고 뭐 해? 왁스 식는다 ㅋㅋ','손 놓으면 공장장이 대신 부순다 ㅋㅋ']},
-en:{start:['Clocking in again? Bold move lol','Boss is here. You do the work lol'],first:['Nice first hit! lol','Already cracked. You got talent lol'],combo:['Combo going! Do not stop lol','Fingers tired yet? Keep going lol'],fever:['FEVER TIME! Smash it all lol'],broken:['Your tool snapped lol. Bargain bin?'],clear:['Last piece... hold your breath lol'],idle:['Why not smashing? Wax is cooling lol','Stop and the boss will do it lol']}
+en:{start:['Clocking in again? Bold move','Boss is here. You do the work'],first:['Nice first hit!','Already cracked. You got talent'],combo:['Combo going! Do not stop','Fingers tired yet? Keep going'],fever:['FEVER TIME! Smash it all'],broken:['Your tool snapped. Bargain bin?'],clear:['Last piece... hold your breath'],idle:['Why not smashing? Wax is cooling','Stop and the boss will do it']}
 };
 let quipT=0;
 const quipEl=$('quip');let quipOn=false;
@@ -739,7 +799,8 @@ let T=0;
 const timeCtl={scale:1,slowT:0,photoSlow:false};
 const combo={val:0,count:0,t:-99,fever:0,max:0};
 const round={gold:0,idx:0,total:4,items:[],ballGold:0,mode:'normal',boss:0,tut:false,xp:0,cleared:0,t:0};
-let phase='break',phaseT=0,curTool='hand';const toolLv=save.tools;
+let phase='break',phaseT=0,curTool='hand',curLv=1;const toolLv=save.tools;
+const toolLocked=k=>(CONFIG.tools[k].lv||1)>curLv;
 const dur={},broken={},toolCd={};
 const TO=CONFIG.toolOrder;
 function resetTools(){for(let i=0;i<TO.length;i++){const k=TO[i];dur[k]=CONFIG.tools[k].dur?CONFIG.tools[k].dur*(1+0.2*(toolLv[k]-1)):1;broken[k]=false;toolCd[k]=-9}}
@@ -777,10 +838,11 @@ const rr=Math.round(clamp(r,0,1)*50)/50;
 if(tb.last!==rr){tb.last=rr;tb.bar.style.transform='scaleX('+rr+')';tb.bar.style.background=rr<0.25?'#ff5a5a':'#6dff9a'}
 tb.el.classList.toggle('on',k===curTool);
 tb.el.classList.toggle('broken',broken[k]);
-tb.lv.textContent=toolLv[k]>1?'Lv'+toolLv[k]:'';
+const lk=toolLocked(k);tb.el.classList.toggle('lock',lk);tb.lv.textContent=lk?'🔒':(toolLv[k]>1?'Lv'+toolLv[k]:'');
 }
 }
 function selectTool(k){
+if(toolLocked(k)){toast(t('needLv').replace('{n}',CONFIG.tools[k].lv),'bad');return}
 if(broken[k]){bus.emit('brokenTap',k);return}
 if(curTool===k)return;
 curTool=k;toolHud();bus.emit('toolSel',k);
@@ -944,9 +1006,8 @@ p.lx=x;p.ly=y;
 }
 function drillTick(dt){
 if(!holds.length||!canPlay())return;
-const tk='drill';
-if(curTool!==tk||broken[tk])return;
-const tool=CONFIG.tools.drill;
+const tk=curTool,tool=CONFIG.tools[tk];
+if(!tool.hold||broken[tk])return;
 for(let i=0;i<holds.length;i++){
 const p=holds[i];
 p.acc+=dt;
@@ -1008,7 +1069,7 @@ function actionOf(code){
 const k=S.keys;
 for(const a in k)if(k[a]===code)return a;
 if(code==='ArrowLeft')return 'left';if(code==='ArrowRight')return 'right';if(code==='ArrowUp')return 'up';if(code==='ArrowDown')return 'down';
-if(code==='Digit1')return 't1';if(code==='Digit2')return 't2';if(code==='Digit3')return 't3';if(code==='Digit4')return 't4';
+if(/^Digit[1-9]$/.test(code))return 't'+code.charAt(5);
 return null;
 }
 function kbAimXY(){
@@ -1028,10 +1089,10 @@ if(a==='fs'){if(!e.repeat)toggleFs();return}
 if(e.repeat)return;
 keysDown.add(a);
 if(a==='hit'&&!kbHitDown){kbHitDown=true;kbAimXY();pressAt(-1,lastPX,lastPY)}
-else if(a==='t1')selectTool(TO[0]);else if(a==='t2')selectTool(TO[1]);else if(a==='t3')selectTool(TO[2]);else if(a==='t4')selectTool(TO[3]);
+else if(a.length===2&&a.charAt(0)==='t'){const ti=+a.charAt(1)-1;if(TO[ti])selectTool(TO[ti])}
 else if(a==='prev'||a==='next'){
 let i=TO.indexOf(curTool);
-for(let n=0;n<TO.length;n++){i=(i+(a==='next'?1:TO.length-1))%TO.length;if(!broken[TO[i]]){selectTool(TO[i]);break}}
+for(let n=0;n<TO.length;n++){i=(i+(a==='next'?1:TO.length-1))%TO.length;if(!broken[TO[i]]&&!toolLocked(TO[i])){selectTool(TO[i]);break}}
 }
 });
 window.addEventListener('keyup',e=>{
@@ -1120,8 +1181,9 @@ if(Math.abs(camera.fov-fov)>0.01){camera.fov=fov;camera.updateProjectionMatrix()
 }
 
 let state='boot';
-const screens={intro:$('scrIntro'),title:$('scrTitle'),pause:$('scrPause'),result:$('scrResult'),error:$('scrError')};
-function showScreen(name){for(const k in screens)screens[k].classList.toggle('on',k===name)}
+const screens={intro:$('scrIntro'),cover:$('scrCover'),slots:$('scrSlots'),title:$('scrTitle'),pause:$('scrPause'),result:$('scrResult'),error:$('scrError')};
+let titleView='cover';
+function showScreen(name){if(name==='title')name=titleView;for(const k in screens)screens[k].classList.toggle('on',k===name)}
 const TRANS={boot:['intro','title','error'],intro:['title','error'],title:['play','intro','error'],play:['pause','result','title','error'],pause:['play','title','error'],result:['play','title','error'],error:['title']};
 function setState(s){
 if(state===s)return;
@@ -1147,7 +1209,7 @@ setState('play');
 function ballCfg(i){
 if(round.mode==='boss'){const b=BOSS[round.boss];return{L:b.L,N:b.N,R:b.R,seed:100+round.boss,color:b.color,hpMul:b.hpMul,type:b.type,boss:round.boss,itemId:-1}}
 const sets=round.tut?[{L:1,N:10,R:1.15,hp:0.6},{L:2,N:14,R:1.3,hp:0.8},{L:2,N:16,R:1.4,hp:1},{L:3,N:18,R:1.55,hp:1}]:[{L:2,N:12,R:1.2,hp:0.85},{L:2,N:14,R:1.3,hp:1},{L:2,N:16,R:1.4,hp:1},{L:3,N:18,R:1.55,hp:1.05}];
-const sv=sets[Math.min(i,3)];
+const sv0=sets[Math.min(i,3)],lb=round.tut?0:Math.min(2,Math.floor((curLv-1)/6)),sv={L:Math.min(4,sv0.L+(lb>=2&&i>=2?1:0)),N:sv0.N+lb*2,R:sv0.R+lb*0.05,hp:sv0.hp+lb*0.08};
 return{L:sv.L,N:sv.N,R:sv.R,seed:i+1+(round.tut?0:10),color:CONFIG.palette[(i*3+save.stats.rounds)%CONFIG.palette.length],hpMul:sv.hp,type:TYPES[(i+save.stats.rounds)%3],itemId:-1};
 }
 let nextTimer=0,idleT=0,lastProgress=0;
@@ -1157,6 +1219,7 @@ round.mode=mode||'normal';round.boss=boss||0;
 round.tut=round.mode==='normal'&&save.stats.balls===0;
 round.total=round.mode==='boss'?1:4;
 round.gold=0;round.xp=0;round.cleared=0;round.idx=0;round.items.length=0;round.t=0;
+rollOrder();
 combo.val=0;combo.count=0;combo.fever=0;combo.max=0;
 resetTools();
 overlay('Menu',false);closeModal();
@@ -1338,11 +1401,61 @@ $('btnToTitle').addEventListener('click',()=>{toTitle()});
 $('btnAgain').addEventListener('click',()=>{startRound(round.mode,round.boss)});
 $('btnStart').addEventListener('click',()=>{startRound('normal')});
 function toTitle(){
+titleView=curSlot>0?'title':'cover';
 buildBall({L:2,N:14,R:1.3,seed:2,color:CONFIG.palette[4],hpMul:1,type:'soft'});
 phase='break';camBlend=0;
 setState('title');
+refreshTitle();
 }
 
+function setTitleView(v){
+titleView=v;
+if(state==='title'){showScreen('title');if(v==='slots')renderSlots();else if(v==='title')refreshTitle()}
+}
+function fmtDate(ts){if(!ts)return'';const d=new Date(ts);return(d.getMonth()+1)+'/'+d.getDate()+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function lvOf(xp){let x=xp,l=1;while(l<99&&x>=xpNeed(l)){x-=xpNeed(l);l++}return l}
+function enterSlot(n){
+if(saveTimer){clearTimeout(saveTimer);persistNow()}
+const r=readSlot(n);
+let d;
+if(r.d)d=r.d;else{d=defaultSave();if(r.bad)toast(t('savedReset'),'bad')}
+d.s=null;
+curSlot=n;curTool='hand';
+replaceSave(d,false);
+setTitleView('title');
+}
+function deleteSlot(n){
+storeDel(slotKey(n));
+if(curSlot===n){curSlot=0;replaceSave(defaultSave(),false)}
+renderSlots();
+}
+function renderSlots(){
+const list=$('slotList');list.innerHTML='';
+for(let n=1;n<=CONFIG.slots;n++){
+const r=readSlot(n);
+const card=el('div','slot'+(r.d?'':' empty'));
+const main=el('button','slotmain');
+let h='<span class="sn">'+n+'</span>';
+if(r.d){const d=r.d;h+='<span class="sl">'+t('lv')+' '+lvOf(d.xp)+(curSlot===n?' · '+t('using'):'')+'</span><span class="sd">'+fmtDate(d.ts)+'</span><span class="ss">🪙 '+d.gold+' · '+t('dex')+' '+Object.keys(d.dex).length+'/'+CONFIG.dexMax+' · '+t('slotRounds').replace('{n}',d.stats.rounds)+'</span>'}
+else if(r.bad)h+='<span class="sl">'+t('slotCorrupt')+'</span><span class="ss">'+t('slotNew')+'</span>';
+else h+='<span class="sl">'+t('slotEmpty')+'</span><span class="ss">'+t('slotNew')+'</span>';
+main.innerHTML=h;
+main.addEventListener('click',()=>{sfxClick();enterSlot(n)});
+card.appendChild(main);
+if(!r.empty){
+const del=el('button','btn alt sq slotdel','🗑');
+del.setAttribute('aria-label','delete');
+del.addEventListener('click',e=>{e.stopPropagation();sfxClick();modal(t('slotDel'),t('slotDelAsk').replace('{n}',n),[{label:t('slotDel'),cls:'hot',fn:()=>deleteSlot(n)},{label:t('resetNo'),cls:'alt'}])});
+card.appendChild(del);
+}
+list.appendChild(card);
+}
+}
+$('btnPlay').addEventListener('click',()=>{sfxClick();setTitleView('slots')});
+$('btnCSet').addEventListener('click',()=>{sfxClick();openSettings()});
+$('btnCKeys').addEventListener('click',()=>{sfxClick();openKeys()});
+$('btnSlots').addEventListener('click',()=>{sfxClick();if(saveTimer){clearTimeout(saveTimer);persistNow()}setTitleView('slots')});
+$('btnSlotBack').addEventListener('click',()=>{sfxClick();setTitleView(curSlot>0?'title':'cover')});
 function boot(){
 const mem=navigator.deviceMemory||4,cores=navigator.hardwareConcurrency||4;
 qTier=(mem<=3||cores<=4)?'low':((window.devicePixelRatio||1)>=3?'medium':'high');
@@ -1367,16 +1480,17 @@ requestAnimationFrame(frame);
 Object.assign(CONFIG,{ad:{seconds:5},round:{maxSec:300}});
 const RAR=[{c:'#9aa7b8',cb:'#b8c4d6',s:'●',gold:30,xp:20,w:60},{c:'#4da3ff',cb:'#56b4e9',s:'◆',gold:80,xp:40,w:28},{c:'#b05cff',cb:'#cc79a7',s:'★',gold:200,xp:80,w:10},{c:'#ffb020',cb:'#e69f00',s:'✦',gold:600,xp:160,w:2}];
 const RARN={ko:['일반','레어','에픽','전설'],en:['Common','Rare','Epic','Legendary']};
-const TOOLNAME={ko:{hand:'손',hammer:'망치',tweezers:'핀셋',drill:'드릴'},en:{hand:'Hand',hammer:'Hammer',tweezers:'Tweezers',drill:'Drill'}};
+const TOOLNAME={ko:{hand:'손',hammer:'망치',tweezers:'핀셋',drill:'드릴',chisel:'정',torch:'토치'},en:{hand:'Hand',hammer:'Hammer',tweezers:'Tweezers',drill:'Drill',chisel:'Chisel',torch:'Torch'}};
+const TOOLDESC={ko:{hand:'가볍게 두드려요',hammer:'강한 일격, 주변까지 충격',tweezers:'금 간 조각을 깔끔하게 분리',drill:'누르고 있으면 연속 타격',chisel:'한 점에 강하게 파고듦',torch:'누르고 있으면 주변까지 녹임'},en:{hand:'Light taps',hammer:'Heavy blow, hits neighbors',tweezers:'Peels cracked pieces cleanly',drill:'Hold for rapid strikes',chisel:'Deep single-point strike',torch:'Hold to melt a wide area'}};
 const tname=k=>TOOLNAME[S.lang][k];
 const TYPES=['soft','hard','gloss'];
 const TYPENAME={ko:{soft:'말랑',hard:'단단',gloss:'반짝'},en:{soft:'Squishy',hard:'Hard',gloss:'Glossy'}};
 const TYPEMAT={soft:{r:0.48,cc:0.3,op:0.84,env:0.9},hard:{r:0.2,cc:1,op:0.9,env:1.2},gloss:{r:0.08,cc:1,op:0.76,env:1.6}};
 const TEXF={soft:0.75,hard:1.4,gloss:1.1};
 Object.assign(I18N.ko,{lv:'Lv',workshop:'작업실',dex:'도감',tab_tools:'강화',tab_rooms:'배경방',tab_dex:'도감',tab_ach:'업적',bossBtn:'보스볼 도전',bossPick:'보스볼 고르기',locked:'잠김',needLv:'Lv{n} 필요',buy:'강화',maxed:'MAX',use:'선택',unlock:'해금',using:'사용 중',daily:'🎁 일일 보너스',dailyTitle:'출근 도장 쾅!',dailyBody:'{n}일 연속 출근! +{g} 🪙 받아가 ㅋㅋ',adTitle:'도구가 부러졌어 ㅋㅋ',adAsk:'광고 보고 새 {tool} 받을래? ㅋㅋ',adWatch:'광고 보기',adGold:'{g} 🪙로 수리',adBare:'맨손으로 할래',repaired:'{tool} 새것 됐다!',noGold:'골드가 모자라 ㅋㅋ',newTag:'NEW!',best:'이번 판 최고의 발견',found:'발견한 물건',comboMax:'최대 콤보',clearedLbl:'깬 볼',xpGain:'경험치',close:'닫기',effect:'데미지 +22%/Lv · 내구도 +20%/Lv',adLabel:'AD · 가짜 광고(개그용)',adSkipBtn:'건너뛰기 ▶',adClaim:'보상 받기',adDone:'다 봤다! 보상 받아가 ㅋㅋ',adArt:'초강력 왁스 녹이는 기계!!',adArt2:'지금 안 사면 후회함 ㅋㅋ (진짜 아님)',dexCount:'수집',total:'총',skipHint:'탭하면 건너뛰기',time:'시간',timeUp:'퇴근 시간!',saveFail:'저장이 막혀서 임시 메모리로 진행 중이야',savedReset:'저장 데이터가 깨져서 새로 시작했어 ㅋㅋ',cleared:'클리어',loadingTxt:'왁스 녹이는 중...',first:'처음',count:'보유'});
-Object.assign(I18N.en,{lv:'Lv',workshop:'Workshop',dex:'Collection',tab_tools:'Upgrade',tab_rooms:'Rooms',tab_dex:'Collection',tab_ach:'Awards',bossBtn:'Boss Ball',bossPick:'Pick a boss ball',locked:'Locked',needLv:'Need Lv{n}',buy:'Upgrade',maxed:'MAX',use:'Select',unlock:'Unlock',using:'In use',daily:'🎁 Daily Bonus',dailyTitle:'Clock-in stamp!',dailyBody:'{n}-day streak! Take +{g} 🪙 lol',adTitle:'Your tool snapped lol',adAsk:'Watch an ad for a new {tool}? lol',adWatch:'Watch ad',adGold:'Repair for {g} 🪙',adBare:'Bare hands it is',repaired:'Brand new {tool}!',noGold:'Not enough gold lol',newTag:'NEW!',best:'Best find of this run',found:'Items found',comboMax:'Max combo',clearedLbl:'Balls cleared',xpGain:'XP',close:'Close',effect:'Damage +22%/Lv · Durability +20%/Lv',adLabel:'AD · fake ad (just a joke)',adSkipBtn:'Skip ▶',adClaim:'Claim reward',adDone:'All done! Take your reward lol',adArt:'Ultra Wax Melting Machine!!',adArt2:'You will regret not buying lol (not real)',dexCount:'Found',total:'Total',skipHint:'Tap to skip',time:'Time',timeUp:'Quitting time!',saveFail:'Storage is blocked, using temporary memory',savedReset:'Save data was corrupted, starting fresh lol',cleared:'Cleared',loadingTxt:'Melting wax...',first:'First',count:'Owned'});
+Object.assign(I18N.en,{lv:'Lv',workshop:'Workshop',dex:'Collection',tab_tools:'Upgrade',tab_rooms:'Rooms',tab_dex:'Collection',tab_ach:'Awards',bossBtn:'Boss Ball',bossPick:'Pick a boss ball',locked:'Locked',needLv:'Need Lv{n}',buy:'Upgrade',maxed:'MAX',use:'Select',unlock:'Unlock',using:'In use',daily:'🎁 Daily Bonus',dailyTitle:'Clock-in stamp!',dailyBody:'{n}-day streak! Take +{g} 🪙',adTitle:'Your tool snapped',adAsk:'Watch an ad for a new {tool}?',adWatch:'Watch ad',adGold:'Repair for {g} 🪙',adBare:'Bare hands it is',repaired:'Brand new {tool}!',noGold:'Not enough gold',newTag:'NEW!',best:'Best find of this run',found:'Items found',comboMax:'Max combo',clearedLbl:'Balls cleared',xpGain:'XP',close:'Close',effect:'Damage +22%/Lv · Durability +20%/Lv',adLabel:'AD · fake ad (just a joke)',adSkipBtn:'Skip ▶',adClaim:'Claim reward',adDone:'All done! Take your reward',adArt:'Ultra Wax Melting Machine!!',adArt2:'You will regret not buying (not real)',dexCount:'Found',total:'Total',skipHint:'Tap to skip',time:'Time',timeUp:'Quitting time!',saveFail:'Storage is blocked, using temporary memory',savedReset:'Save data was corrupted, starting fresh',cleared:'Cleared',loadingTxt:'Melting wax...',first:'First',count:'Owned'});
 Object.assign(QUIP.ko,{tut:['아래 🔨 망치도 눌러봐 ㅋㅋ 한 방이야','핀셋은 금 간 조각을 깔끔하게 뽑아줘 ㅋㅋ'],newf:['오 도감 새 칸 채웠다 ㅋㅋ','처음 보는 물건이네 ㅋㅋ'],dup:['이거 또 나왔네 ㅋㅋ 재활용 공장이냐','다른 거 나올 줄 알았지? ㅋㅋ'],rare:['오 레어다 ㅋㅋ 오늘 운 쓴다','공장장도 놀랐다 ㅋㅋ'],legend:['전설이야?! 공장장 월급 날아간다 ㅋㅋ'],bossIntro:['보스볼이다 ㅋㅋ 목 풀어','겹겹이 쌓였네 ㅋㅋ 포기는 없다'],timeup:['퇴근 시간이다 ㅋㅋ 정산하자'],good:['오늘 야근 수당 나오겠는데? ㅋㅋ'],bad:['다음엔 좀 더 부숴보자 ㅋㅋ']});
-Object.assign(QUIP.en,{tut:['Try the 🔨 hammer below lol, one smack','Tweezers peel cracked pieces cleanly lol'],newf:['New page in the collection lol','Never seen that before lol'],dup:['Again? Are we a recycling plant lol','Thought it would be different? lol'],rare:['A rare one lol, luck used up','Even the boss is shook lol'],legend:['LEGENDARY?! Boss payday gone lol'],bossIntro:['Boss ball lol, stretch your thumbs','So many layers lol. No quitting'],timeup:['Quitting time lol, let us count up'],good:['Overtime pay incoming lol'],bad:['Smash a bit more next time lol']});
+Object.assign(QUIP.en,{tut:['Try the 🔨 hammer below, one smack','Tweezers peel cracked pieces cleanly'],newf:['New page in the collection','Never seen that before'],dup:['Again? Are we a recycling plant','Thought it would be different?'],rare:['A rare one, luck used up','Even the boss is shook'],legend:['LEGENDARY?! Boss payday gone'],bossIntro:['Boss ball, stretch your thumbs','So many layers. No quitting'],timeup:['Quitting time, let us count up'],good:['Overtime pay incoming'],bad:['Smash a bit more next time']});
 const Q=1.5708,PI=3.1416;
 const IT=(e,ko,en,r,mt,parts)=>({e,ko,en,r,mt,parts,g:null});
 const ITEMS=[
@@ -1419,26 +1533,77 @@ IT('🤖','주머니 로봇','Pocket Robot',2,0.4,[['B',0x9aa7b8,0,-0.1,0,1.1,1.
 IT('🧰','꼬마 보물상자','Mini Treasure Chest',2,0.2,[['B',0x8a5a2a,0,-0.2,0,1.5,0.9,1],['C',0x8a5a2a,0,0.3,0,1,1.5,1,0,0,Q],['B',0xffd23a,0,0.1,0.52,0.25,0.3,0.1],['B',0xffd23a,0.5,0.1,0,0.1,1.4,1.05],['B',0xffd23a,-0.5,0.1,0,0.1,1.4,1.05]]),
 IT('🛸','미니 UFO','Mini UFO',2,0.5,[['S',0xc4cfe0,0,0,0,1.8,0.45,1.8],['S',0x7affc8,0,0.3,0,0.8,0.7,0.8],['S',0xffee4a,0.7,-0.1,0,0.16,0.16,0.16],['S',0xffee4a,-0.7,-0.1,0,0.16,0.16,0.16],['S',0xffee4a,0,-0.1,0.7,0.16,0.16,0.16]]),
 IT('🦆','황금 오리 사장님','Golden Duck Tycoon',3,1,[['S',0xffd23a,0,-0.1,0,1.4,1,1.1],['S',0xffd23a,0.35,0.55,0,0.8,0.8,0.8],['B',0xff8a2a,0.8,0.5,0,0.3,0.14,0.35],['S',0x222222,0.55,0.7,0.2,0.12,0.12,0.12],['S',0x222222,0.55,0.7,-0.2,0.12,0.12,0.12],['K',0x222222,0.35,1.1,0,0.5,0.4,0.5]]),
-IT('🐲','아기 왁스 드래곤','Baby Wax Dragon',3,0.3,[['S',0x7a5cff,0,-0.1,0,1.2,1,1.4],['S',0x7a5cff,0.5,0.5,0,0.7,0.7,0.7],['K',0xffd23a,0.4,0.95,0.15,0.18,0.4,0.18],['K',0xffd23a,0.4,0.95,-0.15,0.18,0.4,0.18],['B',0xff7ab0,-0.2,0.3,0.7,0.9,0.1,0.7],['B',0xff7ab0,-0.2,0.3,-0.7,0.9,0.1,0.7],['K',0x7a5cff,-0.9,-0.2,0,0.4,0.9,0.4,0,0,Q]])
+IT('🐲','아기 왁스 드래곤','Baby Wax Dragon',3,0.3,[['S',0x7a5cff,0,-0.1,0,1.2,1,1.4],['S',0x7a5cff,0.5,0.5,0,0.7,0.7,0.7],['K',0xffd23a,0.4,0.95,0.15,0.18,0.4,0.18],['K',0xffd23a,0.4,0.95,-0.15,0.18,0.4,0.18],['B',0xff7ab0,-0.2,0.3,0.7,0.9,0.1,0.7],['B',0xff7ab0,-0.2,0.3,-0.7,0.9,0.1,0.7],['K',0x7a5cff,-0.9,-0.2,0,0.4,0.9,0.4,0,0,Q]]),
+IT('🍙','한 입 먹은 삼각김밥','Bitten Rice Triangle',0,0,[['K',0xf5f5f0,0,0.1,0,1.5,1.3,0.9],['B',0x1f2a2a,0,-0.5,0,1.1,0.45,0.95],['S',0xe8e4d8,0.3,0.35,0.35,0.35,0.3,0.2]]),
+IT('🧴','바닥난 선크림','Empty Sunscreen',0,0,[['C',0xffd24a,0,-0.1,0,0.8,1.4,0.5],['C',0xffffff,0,0.75,0,0.5,0.3,0.35],['B',0xff8a2a,0,0,0.27,0.5,0.4,0.04]]),
+IT('🧤','한 짝 남은 장갑','Single Glove',0,0,[['B',0x3a7bd5,0,-0.2,0,1.0,1.0,0.35],['B',0x3a7bd5,-0.35,0.55,0,0.22,0.6,0.3],['B',0x3a7bd5,-0.12,0.65,0,0.22,0.75,0.3],['B',0x3a7bd5,0.12,0.65,0,0.22,0.75,0.3],['B',0x3a7bd5,0.36,0.55,0,0.22,0.6,0.3],['B',0x3a7bd5,0.62,0,0,0.35,0.3,0.3,0,0,0.6]]),
+IT('🍋','시큼한 레몬','Sour Lemon',0,0,[['S',0xffe03a,0,0,0,1.4,1.05,1.05],['K',0xffe03a,0.75,0,0,0.3,0.35,0.3,0,0,-Q],['K',0xffe03a,-0.75,0,0,0.3,0.35,0.3,0,0,Q],['S',0x4cba5a,0.15,0.55,0,0.5,0.1,0.3]]),
+IT('🧲','말굽 자석','Horseshoe Magnet',0,0.6,[['T',0xe84a4a,0,0.1,0,1.4,1.4,0.5],['B',0xdadada,-0.7,-0.55,0,0.3,0.4,0.3],['B',0xdadada,0.7,-0.55,0,0.3,0.4,0.3]]),
+IT('🪫','방전된 건전지','Flat Battery',0,0.3,[['C',0x3a3f4a,0,0,0,0.7,1.4,0.7],['C',0xdadada,0,0.78,0,0.28,0.18,0.28],['C',0xffcc33,0,0.1,0,0.72,0.3,0.72]]),
+IT('🧻','마지막 휴지심','Last Paper Roll',0,0,[['C',0xffffff,0,0,0,1.1,1.0,1.1],['C',0xc9b28a,0,0,0,0.45,1.04,0.45]]),
+IT('🍪','부서진 쿠키','Broken Cookie',0,0,[['C',0xc98b4a,0,0,0,1.5,0.35,1.5,Q],['S',0x3a2210,-0.3,0.2,0.2,0.2,0.2,0.1],['S',0x3a2210,0.35,-0.15,0.2,0.2,0.2,0.1],['S',0x3a2210,0.1,0.4,0.2,0.16,0.16,0.1]]),
+IT('🕯️','타다 만 양초','Candle Stub',0,0,[['C',0xfff0c8,0,-0.15,0,0.7,1.1,0.7],['C',0x333333,0,0.5,0,0.05,0.25,0.05],['K',0xffa22a,0,0.8,0,0.25,0.4,0.25]]),
+IT('🧷','옷핀','Safety Pin',0,0.7,[['T',0xc6ccd6,-0.35,0,0,0.5,0.5,0.3],['B',0xc6ccd6,0.2,0.2,0,1.1,0.08,0.08],['B',0xc6ccd6,0.2,-0.2,0,1.1,0.08,0.08]]),
+IT('📌','압정','Thumbtack',0,0.5,[['C',0xe84a4a,0,0.35,0,0.9,0.25,0.9],['C',0xe84a4a,0,0.15,0,0.45,0.2,0.45],['K',0xc6ccd6,0,-0.3,0,0.2,0.7,0.2,PI]]),
+IT('🧃','구겨진 주스 팩','Crumpled Juice Box',0,0,[['B',0xff9f4a,0,-0.1,0,1.0,1.3,0.6],['B',0xffffff,0,0.0,0.31,0.7,0.5,0.03],['C',0xdddddd,0.25,0.9,0,0.07,0.6,0.07]]),
+IT('🍂','말라붙은 낙엽','Dry Leaf',0,0,[['S',0xc9703a,0,0,0,1.5,1.0,0.14],['B',0x8a4a1a,0.95,-0.1,0,0.5,0.08,0.08],['B',0x8a4a1a,0,0,0.08,1.2,0.04,0.04]]),
+IT('🪀','요요','Yo-Yo',0,0,[['C',0xff5a8a,0,0,-0.22,1.2,0.25,1.2,Q],['C',0xff5a8a,0,0,0.22,1.2,0.25,1.2,Q],['C',0xffffff,0,0,0,0.3,0.4,0.3,Q],['T',0xffffff,0,0.75,0,0.3,0.3,0.1]]),
+IT('🎧','엉킨 헤드폰','Tangled Headphones',1,0,[['T',0x2d2f3a,0,0.2,0,1.4,1.4,0.3],['C',0xff5a5a,-0.7,-0.1,0,0.5,0.4,0.5,0,0,Q],['C',0xff5a5a,0.7,-0.1,0,0.5,0.4,0.5,0,0,Q]]),
+IT('📷','일회용 카메라','Disposable Camera',1,0,[['B',0xf0c43a,0,0,0,1.4,0.9,0.6],['C',0x222222,0,0,0.35,0.5,0.2,0.5,Q],['B',0xffffff,-0.45,0.35,0.32,0.25,0.15,0.05],['S',0x4ac8ff,0,0,0.42,0.25,0.25,0.1]]),
+IT('⌚','멈춘 회중시계','Stopped Pocket Watch',1,0.7,[['C',0xe8c34a,0,0,0,1.4,0.3,1.4,Q],['C',0xf6f2e4,0,0,0.14,1.15,0.05,1.15,Q],['C',0xe8c34a,0,0.8,0,0.2,0.3,0.2],['B',0x222222,0,0.2,0.2,0.06,0.45,0.04],['B',0x222222,0.18,0,0.2,0.35,0.06,0.04]]),
+IT('🎻','작은 바이올린','Little Violin',1,0,[['S',0xb9652a,0,-0.3,0,1.0,1.1,0.4],['S',0xb9652a,0,0.35,0,0.75,0.8,0.4],['B',0x3a2210,0,0.95,0,0.15,0.8,0.15],['B',0xdddddd,0.55,0,0.25,0.06,1.6,0.06,0,0,0.5]]),
+IT('🧪','실험용 플라스크','Lab Flask',1,0,[['K',0x66e0ff,0,-0.1,0,1.4,1.3,1.4],['C',0x66e0ff,0,0.75,0,0.35,0.5,0.35],['S',0xff6bd8,0.1,-0.3,0.2,0.3,0.3,0.3]]),
+IT('🪁','엉킨 연','Tangled Kite',1,0,[['B',0xff5a8a,0,0.2,0,1.2,1.2,0.08,0,0,0.785],['B',0xffffff,0,-0.7,0,0.06,0.9,0.06],['B',0x4ac8ff,0,-1.0,0,0.4,0.15,0.06]]),
+IT('🧸','낡은 곰 인형','Worn Teddy Bear',1,0,[['S',0xb98a5a,0,-0.3,0,1.2,1.2,0.9],['S',0xb98a5a,0,0.55,0,0.9,0.9,0.8],['S',0xb98a5a,-0.35,0.95,0,0.3,0.3,0.3],['S',0xb98a5a,0.35,0.95,0,0.3,0.3,0.3],['S',0x222222,-0.15,0.6,0.36,0.1,0.1,0.1],['S',0x222222,0.15,0.6,0.36,0.1,0.1,0.1],['S',0xe8c9a0,0,0.45,0.38,0.3,0.25,0.2]]),
+IT('🎺','찌그러진 트럼펫','Dented Trumpet',1,0.8,[['C',0xe8b94a,0,0,0,0.25,1.6,0.25,0,0,Q],['K',0xe8b94a,0.95,0,0,0.7,0.5,0.7,0,0,-Q],['T',0xe8b94a,-0.6,0.3,0,0.6,0.6,0.3]]),
+IT('🪞','손거울','Hand Mirror',1,0.4,[['C',0xdfe9f5,0,0.4,0,1.2,0.12,1.2,Q],['T',0xff9fc8,0,0.4,0,1.3,1.3,0.4],['C',0xff9fc8,0,-0.6,0,0.2,1.0,0.2]]),
+IT('🧿','푸른 부적','Blue Charm',1,0,[['S',0x2a5fd5,0,0,0,1.4,1.4,0.6],['S',0xffffff,0,0,0.25,0.95,0.95,0.3],['S',0x4ac8ff,0,0,0.38,0.55,0.55,0.2],['S',0x111111,0,0,0.5,0.25,0.25,0.15]]),
+IT('🛼','한 짝 롤러스케이트','Lone Roller Skate',1,0,[['B',0xff5a8a,0.1,0.15,0,1.4,0.8,0.7],['B',0xffffff,-0.35,0.55,0,0.5,0.6,0.7],['C',0x222222,-0.5,-0.4,0.3,0.4,0.2,0.4,Q],['C',0x222222,0.6,-0.4,0.3,0.4,0.2,0.4,Q],['C',0x222222,-0.5,-0.4,-0.3,0.4,0.2,0.4,Q],['C',0x222222,0.6,-0.4,-0.3,0.4,0.2,0.4,Q]]),
+IT('🎸','우쿨렐레','Ukulele',1,0,[['S',0xd99a4a,0,-0.4,0,1.2,1.1,0.4],['S',0xd99a4a,0,0.2,0,0.85,0.8,0.4],['B',0x3a2210,0,0.95,0,0.2,1.2,0.12],['S',0x222222,0,-0.3,0.22,0.35,0.35,0.1]]),
+IT('🥁','작은 드럼','Snare Drum',1,0,[['C',0xe84a4a,0,0,0,1.5,0.9,1.5],['C',0xdddddd,0,0.48,0,1.5,0.06,1.5],['B',0xffffff,-0.4,0.95,0,0.08,1.0,0.08,0,0,0.5],['B',0xffffff,0.4,0.95,0,0.08,1.0,0.08,0,0,-0.5]]),
+IT('🪅','터진 피냐타','Burst Pinata',1,0,[['S',0xff8ad8,0,0,0,1.5,1.1,1.0],['S',0xffd23a,0,0.1,0.15,1.0,0.7,0.8],['B',0x4ac8ff,-0.5,-0.55,0,0.25,0.5,0.2],['B',0x4ac8ff,0.5,-0.55,0,0.25,0.5,0.2],['S',0x7affc8,0.55,0.55,0,0.5,0.5,0.5]]),
+IT('🏆','먼지 쌓인 트로피','Dusty Trophy',2,0.8,[['K',0xffd23a,0,0.35,0,1.2,1.0,1.2,PI],['C',0xffd23a,0,-0.3,0,0.2,0.5,0.2],['B',0x3a2210,0,-0.75,0,1.0,0.3,0.7],['T',0xffd23a,-0.65,0.4,0,0.5,0.5,0.2],['T',0xffd23a,0.65,0.4,0,0.5,0.5,0.2]]),
+IT('🗝️','창고 마스터키','Warehouse Master Key',2,0.8,[['T',0x9a7cff,-0.55,0,0,0.9,0.9,0.4],['C',0x9a7cff,0.25,0,0,0.2,1.3,0.2,0,0,Q],['B',0x9a7cff,0.6,-0.2,0,0.2,0.4,0.2],['S',0xff7ad8,-0.55,0,0,0.25,0.25,0.25]]),
+IT('🔭','황동 망원경','Brass Telescope',2,0.6,[['C',0xcaa24a,0,0.1,0,0.5,1.6,0.5,0,0,1.1],['C',0xb98a3a,0.45,0.4,0,0.7,0.5,0.7,0,0,1.1],['C',0x3a2210,-0.2,-0.6,0,0.1,1.0,0.1,0,0,0.3],['C',0x3a2210,0.2,-0.6,0,0.1,1.0,0.1,0,0,-0.3]]),
+IT('🎭','희극 가면','Comedy Mask',2,0,[['S',0xf6f2e4,0,0,0,1.4,1.7,0.5],['S',0x222222,-0.3,0.2,0.22,0.3,0.15,0.1],['S',0x222222,0.3,0.2,0.22,0.3,0.15,0.1],['B',0xe84a4a,0,-0.35,0.24,0.6,0.12,0.08]]),
+IT('🚁','장난감 헬리콥터','Toy Helicopter',2,0,[['S',0xe84a4a,0,0,0,1.5,0.9,0.9],['B',0xe84a4a,-1.0,0.1,0,1.0,0.15,0.15],['B',0xdddddd,0,0.6,0,2.0,0.06,0.2],['C',0x222222,0,0.5,0,0.12,0.2,0.12],['S',0x9ad8ff,0.45,0.1,0.3,0.5,0.45,0.2]]),
+IT('🪐','고리 달린 행성','Ringed Planet',2,0.3,[['S',0xffb35c,0,0,0,1.3,1.3,1.3],['T',0xffe3a0,0,0,0,2.2,2.2,0.3,1.2,0,0.3]]),
+IT('🏺','금 간 도자기','Cracked Vase',2,0.2,[['S',0x3a7bd5,0,-0.1,0,1.3,1.5,1.3],['C',0x3a7bd5,0,0.8,0,0.5,0.5,0.5],['T',0xffd23a,0,0.55,0,0.7,0.7,0.4,Q,0,0],['C',0xffd23a,0,-0.1,0,1.32,0.12,1.32]]),
+IT('🛡️','장식용 방패','Ornate Shield',2,0.8,[['C',0xb9c4d6,0,0,0,1.6,0.2,1.6,Q],['C',0xe84a4a,0,0,0.08,1.2,0.2,1.2,Q],['S',0xffd23a,0,0,0.2,0.4,0.4,0.2],['T',0xffd23a,0,0,0.12,1.6,1.6,0.2]]),
+IT('🦄','왁스 유니콘','Wax Unicorn',3,0.3,[['S',0xffffff,0,-0.2,0,1.3,1.0,0.8],['S',0xffffff,0.6,0.4,0,0.7,0.8,0.6],['K',0xffd23a,0.75,0.95,0,0.2,0.6,0.2],['S',0xff7ad8,0.35,0.55,-0.25,0.35,0.7,0.3],['C',0xffffff,-0.4,-0.75,0.2,0.2,0.7,0.2],['C',0xffffff,-0.4,-0.75,-0.2,0.2,0.7,0.2],['C',0xffffff,0.3,-0.75,0.2,0.2,0.7,0.2],['C',0xffffff,0.3,-0.75,-0.2,0.2,0.7,0.2]]),
+IT('💎','프리즘 원석','Prism Gem',3,1,[['K',0x7affff,0,0.5,0,1.4,1.0,1.4],['K',0x7affff,0,-0.4,0,1.4,1.0,1.4,PI],['S',0xffffff,0.3,0.4,0.4,0.2,0.2,0.2],['S',0xff7ad8,-0.3,0.1,0.5,0.15,0.15,0.15]]),
+IT('🎖️','창업주의 훈장','Founder Medal',3,1,[['C',0xffd23a,0,0,0,1.5,0.2,1.5,Q],['S',0xe84a4a,0,0,0.15,0.7,0.7,0.2],['B',0x3a7bd5,-0.3,1.0,0,0.35,0.9,0.1,0,0,0.3],['B',0x3a7bd5,0.3,1.0,0,0.35,0.9,0.1,0,0,-0.3]]),
+IT('🔥','꺼지지 않는 불씨','Eternal Ember',3,0,[['K',0xff7a2a,0,0.2,0,1.0,1.7,1.0],['K',0xffd23a,0,0.1,0.05,0.6,1.2,0.6],['S',0xfff1b0,0,-0.2,0,0.4,0.4,0.4],['C',0x3a2a1a,0,-0.85,0,1.2,0.25,1.2]])
 ];
 const BYR=[[],[],[],[]];
 ITEMS.forEach((d,i)=>BYR[d.r].push(i));
 const ROOMS=[
 {ko:'작업대 방',en:'Workbench Room',cost:0,lv:1,bg:0x24192e,floor:0x5a4670,disk:0x7a62a0,wall:0x3a2a52,hemiS:0xfff1e0,hemiG:0x3a2a50,key:0xfff0d8,ki:2.4,rim:0x9fc4ff,fill:0xffb98a,crate:[0xc98b4a,0x8a5a2a,0xe0a95a],lamp:0xffd88a},
 {ko:'야간 창고',en:'Night Warehouse',cost:600,lv:3,bg:0x0f1a2e,floor:0x2a3b57,disk:0x3d5a86,wall:0x1b2b45,hemiS:0xbcd8ff,hemiG:0x142033,key:0xcfe3ff,ki:2,rim:0xff7ad0,fill:0x66a8ff,crate:[0x4a6a8a,0x6a8aaa,0x37526e],lamp:0x9fd8ff},
-{ko:'젤리 온실',en:'Jelly Greenhouse',cost:1800,lv:6,bg:0x143a30,floor:0x2f7a60,disk:0x66c59a,wall:0x1f5a48,hemiS:0xf4ffe8,hemiG:0x2a5a40,key:0xfff4d0,ki:2.6,rim:0xffa0d8,fill:0xa0ffd0,crate:[0xff8ab8,0xffd36a,0x8ae0ff],lamp:0xffe8a0}
+{ko:'젤리 온실',en:'Jelly Greenhouse',cost:1800,lv:6,bg:0x143a30,floor:0x2f7a60,disk:0x66c59a,wall:0x1f5a48,hemiS:0xf4ffe8,hemiG:0x2a5a40,key:0xfff4d0,ki:2.6,rim:0xffa0d8,fill:0xa0ffd0,crate:[0xff8ab8,0xffd36a,0x8ae0ff],lamp:0xffe8a0},
+{ko:'새벽 냉동 창고',en:'Frozen Cold Storage',cost:3200,lv:9,bg:0x0b1d2a,floor:0x2c5a70,disk:0x7ac6e8,wall:0x174058,hemiS:0xe4f6ff,hemiG:0x1c3a4c,key:0xe0f4ff,ki:2.5,rim:0x7affff,fill:0xa0c8ff,crate:[0x8fc8e8,0xc6e6f6,0x5a9ab8],lamp:0xcfefff},
+{ko:'노을 지는 옥상',en:'Sunset Rooftop',cost:6000,lv:12,bg:0x3a1a2a,floor:0x7a3a4a,disk:0xff9a6a,wall:0x5a2a3a,hemiS:0xffd8b0,hemiG:0x4a2038,key:0xffb878,ki:2.8,rim:0xff5a8a,fill:0xffd36a,crate:[0xd8745a,0xa8503a,0xe89a6a],lamp:0xffc27a}
 ];
 const BOSS=[
-{ko:'대왕 몽실볼',en:'Grand Squishball',L:3,N:20,R:2,hpMul:1,color:0xff7aa8,type:'soft',minRar:1,lv:3},
-{ko:'겹겹이 양파볼',en:'Onion Layer Ball',L:4,N:22,R:2.15,hpMul:1.1,color:0xa58bff,type:'hard',minRar:2,lv:5},
-{ko:'공장장 심술볼',en:'Grumpy Boss Ball',L:4,N:26,R:2.3,hpMul:1.2,color:0xffb35c,type:'gloss',minRar:2,lv:8}
+{ko:'대왕 몽실볼',en:'Grand Squishball',L:3,N:20,R:2,hpMul:1,color:0xff7aa8,type:'soft',minRar:1,lv:3,leg:0},
+{ko:'겹겹이 양파볼',en:'Onion Layer Ball',L:4,N:22,R:2.15,hpMul:1.1,color:0xa58bff,type:'hard',minRar:2,lv:5,leg:0},
+{ko:'공장장 심술볼',en:'Grumpy Boss Ball',L:4,N:26,R:2.3,hpMul:1.2,color:0xffb35c,type:'gloss',minRar:2,lv:8,leg:0.5},
+{ko:'호박 화석볼',en:'Amber Fossil Ball',L:4,N:30,R:2.45,hpMul:1.35,color:0xe8a43a,type:'gloss',minRar:2,lv:11,leg:0.35},
+{ko:'용광로 대표볼',en:'Furnace Chief Ball',L:4,N:34,R:2.6,hpMul:1.55,color:0xff5a3a,type:'hard',minRar:3,lv:15,leg:1}
 ];
 const ACH=[
 {id:'hit',ko:'첫 손맛',en:'First Smash',g:30},{id:'piece',ko:'첫 조각 분리',en:'First Piece',g:30},{id:'dex1',ko:'첫 발견',en:'First Find',g:50},{id:'clear1',ko:'첫 볼 클리어',en:'First Ball Cleared',g:100},
-{id:'combo20',ko:'콤보 장인',en:'Combo Pro',g:80},{id:'fever',ko:'피버 입문',en:'Fever Rookie',g:60},{id:'broke',ko:'부러진 도구',en:'Snapped Tool',g:40},{id:'ad',ko:'광고 시청러 ㅋㅋ',en:'Ad Enjoyer lol',g:50},
+{id:'combo20',ko:'콤보 장인',en:'Combo Pro',g:80},{id:'fever',ko:'피버 입문',en:'Fever Rookie',g:60},{id:'broke',ko:'부러진 도구',en:'Snapped Tool',g:40},{id:'ad',ko:'광고 시청러 ㅋㅋ',en:'Ad Enjoyer',g:50},
 {id:'rare',ko:'레어 헌터',en:'Rare Hunter',g:100},{id:'epic',ko:'에픽 헌터',en:'Epic Hunter',g:200},{id:'legend',ko:'전설 발견',en:'Legend Found',g:500},
 {id:'dex10',ko:'도감 10종',en:'10 Collected',g:150},{id:'dex25',ko:'도감 25종',en:'25 Collected',g:300},{id:'dex40',ko:'도감 완성',en:'Collection Done',g:1000},
-{id:'balls10',ko:'공장 10볼',en:'10 Balls',g:150},{id:'boss1',ko:'보스볼 사냥꾼',en:'Boss Hunter',g:250},{id:'room',ko:'새 방 해금',en:'New Room',g:100},{id:'lv5',ko:'Lv5 달성',en:'Reach Lv5',g:150}
+{id:'balls10',ko:'공장 10볼',en:'10 Balls',g:150},{id:'boss1',ko:'보스볼 사냥꾼',en:'Boss Hunter',g:250},{id:'room',ko:'새 방 해금',en:'New Room',g:100},{id:'lv5',ko:'Lv5 달성',en:'Reach Lv5',g:150},
+{id:'dex60',ko:'도감 60종',en:'60 Collected',g:500},{id:'dex80',ko:'도감 완성',en:'Collection Complete',g:2000},
+{id:'balls50',ko:'공장 50볼',en:'50 Balls',g:300},{id:'balls200',ko:'공장 200볼',en:'200 Balls',g:800},{id:'rounds10',ko:'열 번의 근무',en:'Ten Shifts',g:200},
+{id:'lv10',ko:'Lv10 달성',en:'Reach Lv10',g:300},{id:'lv20',ko:'Lv20 달성',en:'Reach Lv20',g:800},{id:'combo40',ko:'콤보 달인',en:'Combo Master',g:200},
+{id:'boss3',ko:'같은 보스 3회 격파',en:'Repeat Slayer',g:300},{id:'bossall',ko:'보스 전원 격파',en:'All Bosses Down',g:1000},
+{id:'room3',ko:'작업장 수집가',en:'Room Collector',g:200},{id:'roomall',ko:'작업장 전부 해금',en:'All Rooms',g:600},{id:'toolmax',ko:'도구 최대 강화',en:'Maxed Tool',g:500},
+{id:'day3',ko:'3일 연속 출근',en:'3-Day Streak',g:150},{id:'day7',ko:'일주일 개근',en:'7-Day Streak',g:400},
+{id:'order1',ko:'첫 지시서 완료',en:'First Order',g:100},{id:'order10',ko:'지시서 10건 완료',en:'10 Orders',g:400}
 ];
 function applyRarColors(){
 const r=document.documentElement.style;
@@ -1489,7 +1654,7 @@ const luck=idx*0.12;
 const w=[RAR[0].w,RAR[1].w*(1+luck),RAR[2].w*(1+luck*1.5),RAR[3].w*(1+luck*2)];
 let x=Math.random()*(w[0]+w[1]+w[2]+w[3]),r=0;
 for(;r<3;r++){if(x<w[r])break;x-=w[r]}
-if(cfg.boss!==undefined){r=Math.max(r,BOSS[cfg.boss].minRar);if(cfg.boss===2&&Math.random()<0.5)r=3}
+if(cfg.boss!==undefined){r=Math.max(r,BOSS[cfg.boss].minRar);if(Math.random()<BOSS[cfg.boss].leg)r=3}
 else if(round.tut&&idx===1)r=Math.max(r,1);
 const pool=BYR[r];
 let unseen=0;
@@ -1501,6 +1666,67 @@ for(let i=0;i<pool.length;i++)if(!save.dex[pool[i]]){if(n===0)return pool[i];n--
 return pool[(Math.random()*pool.length)|0];
 }
 
+const ORD=[
+{id:'combo',v:[15,25,40],ko:'콤보 {n} 달성',en:'Reach a {n} combo'},
+{id:'rare',v:[1,1,2],ko:'레어 이상 {n}개 발견',en:'Find {n} Rare+ item(s)'},
+{id:'new',v:[1,2,2],ko:'새 물건 {n}개 도감 등록',en:'Register {n} new item(s)'},
+{id:'clear',v:[3,4,4],ko:'볼 {n}개 완료',en:'Clear {n} balls'},
+{id:'gold',v:[250,400,650],ko:'이번 판 골드 {n} 획득',en:'Earn {n} gold this run'},
+{id:'tool',v:[10,16,24],ko:'{tool}(으)로 조각 {n}개 분리',en:'Detach {n} pieces with {tool}'}
+];
+function ordText(o){for(let i=0;i<ORD.length;i++)if(ORD[i].id===o.id)return ORD[i][S.lang].replace('{n}',o.tgt).replace('{tool}',o.tool?tname(o.tool):'');return''}
+function orderLine(){const o=round.order;if(!o)return'';return'📋 '+ordText(o)+' ('+Math.min(o.prog,o.tgt)+'/'+o.tgt+')'+(o.done?' ✔':'')}
+function rollOrder(){
+if(round.mode!=='normal'||round.tut){round.order=null;return}
+const lvI=Math.min(2,Math.floor(curLv/5));
+let pool=ORD.slice();
+if(dexCount()>=CONFIG.dexMax)pool=pool.filter(o=>o.id!=='new');
+const d=pool[(Math.random()*pool.length)|0];
+let tool='';
+if(d.id==='tool'){const c=[];for(let i=1;i<TO.length;i++)if(!toolLocked(TO[i]))c.push(TO[i]);tool=c[(Math.random()*c.length)|0]}
+round.order={id:d.id,tgt:Math.min(d.v[lvI],d.id==='clear'?round.total:99999),tool,prog:0,done:false,reward:60+lvI*50};
+toast('📋 '+t('ordTitle')+': '+ordText(round.order),'ok');
+}
+function orderCheck(){
+const o=round.order;
+if(!o||o.done||o.prog<o.tgt)return;
+o.done=true;
+save.gold+=o.reward;round.gold+=o.reward;save.stats.orders++;
+addXp(25);hudUpdate();sfxLevel();
+toast('📋 '+t('ordDone')+' +'+o.reward+' 🪙','ach');
+checkAch();persist();
+}
+function orderHit(){
+const o=round.order;
+if(!o||o.done)return;
+if(o.id==='combo'){if(combo.count>o.prog){o.prog=combo.count;orderCheck()}}
+else if(o.id==='gold'){o.prog=round.gold;orderCheck()}
+}
+function orderReveal(r,isNew){
+const o=round.order;
+if(!o||o.done)return;
+if(o.id==='rare'){if(r>=1)o.prog++}
+else if(o.id==='new'){if(isNew)o.prog++}
+else if(o.id==='clear')o.prog=round.cleared;
+else if(o.id==='gold')o.prog=round.gold;
+orderCheck();
+}
+function checkAch(){
+const n=dexCount(),st=save.stats;
+if(n>=10)unlock('dex10');if(n>=25)unlock('dex25');if(n>=40)unlock('dex40');if(n>=60)unlock('dex60');if(n>=CONFIG.dexMax)unlock('dex80');
+if(st.balls>=10)unlock('balls10');if(st.balls>=50)unlock('balls50');if(st.balls>=200)unlock('balls200');
+if(st.rounds>=10)unlock('rounds10');
+if(curLv>=5)unlock('lv5');if(curLv>=10)unlock('lv10');if(curLv>=20)unlock('lv20');
+let bk=0,mx=0;
+for(let i=0;i<st.bosses.length;i++){if(st.bosses[i]>0)bk++;if(st.bosses[i]>mx)mx=st.bosses[i]}
+if(bk>=st.bosses.length)unlock('bossall');if(mx>=3)unlock('boss3');
+let ro=0;
+for(let i=0;i<save.rooms.own.length;i++)ro+=save.rooms.own[i];
+if(ro>=3)unlock('room3');if(ro>=CONFIG.roomMax)unlock('roomall');
+for(const k in save.tools)if(save.tools[k]>=CONFIG.upgrade.maxLv)unlock('toolmax');
+if(save.daily.streak>=3)unlock('day3');if(save.daily.streak>=7)unlock('day7');
+if(st.orders>=1)unlock('order1');if(st.orders>=10)unlock('order10');
+}
 const crateMesh=new THREE.InstancedMesh(new THREE.BoxGeometry(1,1,1),new THREE.MeshStandardMaterial({roughness:0.85}),18);
 const lampMesh=new THREE.InstancedMesh(new THREE.SphereGeometry(0.4,10,8),new THREE.MeshBasicMaterial(),7);
 {
@@ -1584,6 +1810,8 @@ const f=tf();
 if(tk==='hand'){noise('lowpass',900*f,0.7,0.07,0.5);tone('sine',170*f,80,0.09,0.55)}
 else if(tk==='hammer'){tone('sine',120*f,40,0.22,0.95);noise('bandpass',1100*f,1.2,0.14,0.6);tone('triangle',260*f,110,0.1,0.3,0.03)}
 else if(tk==='tweezers'){tone('triangle',1900*f,1300,0.05,0.35);noise('highpass',4200,0.8,0.03,0.3)}
+else if(tk==='chisel'){tone('square',620*f,300,0.08,0.4);noise('bandpass',3200*f,3,0.05,0.4);tone('triangle',180*f,70,0.12,0.5)}
+else if(tk==='torch')noise('lowpass',1800*f,0.8,0.05,0.14);
 else noise('bandpass',2600*f,2,0.04,0.16);
 }
 function sfxCrack(){if(!thr('crack',40))return;const f=tf();noise('highpass',2600*f,0.9,0.05,0.35);tone('square',900*f,400,0.04,0.12)}
@@ -1637,8 +1865,8 @@ let drillOn=false;
 function drillAudio(){
 if(!AU.ctx)return;
 let on=false;
-if(state==='play'&&phase==='break'&&!frozen&&curTool==='drill'&&!broken.drill&&holds.length>0)on=true;
-if(on!==drillOn){drillOn=on;AU.drill.g.gain.setTargetAtTime(on?0.22:0,AU.ctx.currentTime,0.04)}
+if(state==='play'&&phase==='break'&&!frozen&&CONFIG.tools[curTool].hold&&!broken[curTool]&&holds.length>0)on=true;
+if(on!==drillOn){drillOn=on;AU.drill.g.gain.setTargetAtTime(on?(curTool==='torch'?0.12:0.22):0,AU.ctx.currentTime,0.04)}
 }
 const canVib=typeof navigator.vibrate==='function';
 let lastVib=0;
@@ -1654,7 +1882,7 @@ const el=(tag,cls,html)=>{const e=document.createElement(tag);if(cls)e.className
 const overlay=(name,on)=>$('scr'+name).classList.toggle('on',on);
 function modal(title,body,btns,freeze){
 $('mTitle').textContent=title;$('mBody').innerHTML=body;
-const box=$('mBtns');box.innerHTML='';
+const box=$('mBtns');box.innerHTML='';box.classList.toggle('many',btns.length>4);
 for(let i=0;i<btns.length;i++){
 const b=btns[i],e=el('button','btn '+(b.cls||''),b.label);
 e.addEventListener('click',()=>{sfxClick();if(!b.keep)closeModal();if(b.fn)b.fn()});
@@ -1681,7 +1909,7 @@ setTimeout(()=>{if(performance.now()>=toastUntil[i]-50)e.classList.remove('on')}
 }
 }
 function updateLv(){
-const li=levelInfo();
+const li=levelInfo();curLv=li.lv;
 $('lvTxt').textContent=t('lv')+' '+li.lv;
 $('lvChip').style.setProperty('--xp',(li.cur/li.need*100).toFixed(0)+'%');
 }
@@ -1690,10 +1918,10 @@ const before=levelInfo().lv;
 save.xp+=n;
 const after=levelInfo().lv;
 if(after>before){
-for(let l=before+1;l<=after;l++){const g=100+l*30;save.gold+=g;toast('⬆️ '+t('lv')+' '+l+'! +'+g+' 🪙','lvl');if(l>=5)unlock('lv5')}
+for(let l=before+1;l<=after;l++){const g=100+l*30;save.gold+=g;toast('⬆️ '+t('lv')+' '+l+'! +'+g+' 🪙','lvl');if(l>=5)unlock('lv5');for(let q=0;q<TO.length;q++)if(CONFIG.tools[TO[q]].lv===l)toast('🛠️ '+t('toolOpen').replace('{tool}',tname(TO[q])),'lvl')}
 sfxLevel();vib([20,40,20,40,60]);
 }
-updateLv();persist();
+updateLv();persist();checkAch();
 }
 function unlock(id){
 if(save.ach[id])return;
@@ -1719,7 +1947,7 @@ if(adBusy){resolve(false);return}
 adBusy=true;auVol();
 const scr=$('scrAd'),skip=$('adSkip'),claim=$('adClaim'),cnt=$('adCnt'),msg=$('adMsg');
 let left=CONFIG.ad.seconds,dodge=0;
-const lines=S.lang==='ko'?['어딜 눌러 ㅋㅋ','못 잡지? ㅋㅋ','손가락이 느린데 ㅋㅋ','광고는 끝까지 보는 거야 ㅋㅋ']:['Where are you tapping lol','Cannot catch me lol','Slow fingers lol','Ads are meant to be finished lol'];
+const lines=S.lang==='ko'?['어디를 누르시는 거죠?','잡을 수 있겠어요?','손이 조금 느리신데요.','광고는 끝까지 보셔야죠.']:['Where are you tapping?','Think you can catch me?','Slow fingers.','Ads are meant to be finished.'];
 scr.classList.add('on');
 claim.style.display='none';skip.style.display='';skip.style.left='';skip.style.top='';
 cnt.textContent=left;msg.textContent='';
@@ -1760,13 +1988,15 @@ if(!dailyReady())return;
 const y=new Date();y.setDate(y.getDate()-1);
 const streak=save.daily.last===todayStr(y)?Math.min(save.daily.streak+1,9999):1;
 const g=80+Math.min(streak,7)*40;
-save.daily.last=todayStr();save.daily.streak=streak;save.gold+=g;
+save.daily.last=todayStr();save.daily.streak=streak;save.gold+=g;checkAch();
 addXp(30);persist();sfxLevel();
 modal(t('dailyTitle'),t('dailyBody').replace('{n}',streak).replace('{g}',g),[{label:'OK',cls:'hot'}]);
 refreshTitle();
 }
 function refreshTitle(){
 $('btnDaily').style.display=dailyReady()?'':'none';
+const li=levelInfo();
+$('hubInfo').textContent=curSlot>0?t('slotName').replace('{n}',curSlot)+' · '+t('lv')+' '+li.lv+' · 🪙 '+save.gold:'';
 }
 function bossPopup(){
 const lv=levelInfo().lv;
@@ -1789,11 +2019,12 @@ function renderTools(body){
 body.appendChild(el('p','dim',t('effect')));
 for(let i=0;i<TO.length;i++){
 const k=TO[i],lv=toolLv[k],max=lv>=CONFIG.upgrade.maxLv,cost=upCost(lv);
-const row=el('div','mrow','<span class="mic">'+CONFIG.tools[k].icon+'</span><div class="mtx"><b>'+tname(k)+' '+t('lv')+lv+'</b><small>'+(k==='hand'?'':'')+'</small></div>');
+if(toolLocked(k)){body.appendChild(el('div','mrow','<span class="mic">🔒</span><div class="mtx"><b>'+tname(k)+'</b><small>'+t('needLv').replace('{n}',CONFIG.tools[k].lv)+'</small></div>'));continue}
+const row=el('div','mrow','<span class="mic">'+CONFIG.tools[k].icon+'</span><div class="mtx"><b>'+tname(k)+' '+t('lv')+lv+'</b><small>'+TOOLDESC[S.lang][k]+'</small></div>');
 const b=el('button','btn '+(max?'alt':'hot'),max?t('maxed'):t('buy')+' '+cost+'🪙');
 if(!max)b.addEventListener('click',()=>{
 if(save.gold<cost){toast(t('noGold'),'bad');return}
-save.gold-=cost;toolLv[k]++;dur[k]=maxDur(k);broken[k]=false;sfxLevel();persist();toolHud();hudUpdate();renderMenu();
+save.gold-=cost;toolLv[k]++;dur[k]=maxDur(k);broken[k]=false;sfxLevel();persist();toolHud();hudUpdate();checkAch();renderMenu();
 });
 row.appendChild(b);body.appendChild(row);
 }
@@ -1808,13 +2039,13 @@ if(own){const cur=save.rooms.cur===i;b=el('button','btn '+(cur?'alt':'hot'),cur?
 else{b=el('button','btn '+(lv>=r.lv?'hot':'alt'),lv>=r.lv?t('unlock')+' '+r.cost+'🪙':'🔒');b.addEventListener('click',()=>{
 if(lv<r.lv){toast(t('needLv').replace('{n}',r.lv),'bad');return}
 if(save.gold<r.cost){toast(t('noGold'),'bad');return}
-save.gold-=r.cost;save.rooms.own[i]=1;applyRoom(i);unlock('room');sfxLevel();hudUpdate();renderMenu();
+save.gold-=r.cost;save.rooms.own[i]=1;applyRoom(i);unlock('room');checkAch();sfxLevel();hudUpdate();renderMenu();
 })}
 row.appendChild(b);body.appendChild(row);
 }
 }
 function renderDex(body){
-body.appendChild(el('p','dim',t('dexCount')+' '+dexCount()+'/40'));
+body.appendChild(el('p','dim',t('dexCount')+' '+dexCount()+'/'+CONFIG.dexMax));
 const grid=el('div','dgrid');
 const info=el('div','dinfo','');
 for(let i=0;i<ITEMS.length;i++){
@@ -1853,6 +2084,7 @@ const d=ITEMS[best.id];
 h+='<div class="bestcard" style="--rc:var(--r'+d.r+')"><div class="bt">'+t('best')+'</div><div class="ie">'+d.e+'</div><div class="in">'+d[S.lang]+'</div><div class="ir">'+RAR[d.r].s+' '+rarName(d.r)+(best.isNew?' <span class="nw">'+t('newTag')+'</span>':'')+'</div></div>';
 }
 h+='<div class="stats"><div>🪙 +'+round.gold+'</div><div>⚡ '+t('comboMax')+' '+combo.max+'</div><div>🔮 '+t('clearedLbl')+' '+round.cleared+'/'+round.total+'</div><div>✨ '+t('xpGain')+' +'+round.xp+'</div></div>';
+if(round.order)h+='<div class="ordline">'+orderLine()+'</div>';
 if(round.items.length){h+='<div class="chips">';for(let i=0;i<round.items.length;i++){const d=ITEMS[round.items[i].id];h+='<span class="ichip" style="--rc:var(--r'+d.r+')">'+d.e+'</span>'}h+='</div>'}
 $('resultTxt').innerHTML=h;
 say(round.gold>150?'good':'bad');
@@ -1867,6 +2099,7 @@ for(let l=0;l<MAXL;l++)for(let k=0;k<3;k++){const m=matSets[l][k];m.roughness=tm
 bus.on('gesture',()=>{auInit();auVol()});
 bus.on('state',(s)=>{
 auVol();
+if(s==='pause')$('orderTxt').textContent=orderLine();
 if(s==='title')refreshTitle();
 if(s==='pause'&&AU.ctx&&AU.drill)AU.drill.g.gain.setTargetAtTime(0,AU.ctx.currentTime,0.02);
 });
@@ -1874,7 +2107,7 @@ bus.on('hit',(tool,tk,ch)=>{
 sfxHit(tk);vib(tool.vib);
 save.stats.hits++;
 if(save.stats.hits===1)unlock('hit');
-if(combo.count>=20)unlock('combo20');
+if(combo.count>=20)unlock('combo20');if(combo.count>=40)unlock('combo40');orderHit();
 if(save.stats.hits%25===0)persist();
 });
 bus.on('crack',()=>sfxCrack());
@@ -1882,6 +2115,7 @@ bus.on('detach',(ch,tool,clean)=>{
 sfxDetach(clean);vib(clean?[8]:[14]);
 save.stats.pieces++;
 if(save.stats.pieces===1)unlock('piece');
+{const od=round.order;if(od&&!od.done&&od.id==='tool'&&tool===CONFIG.tools[od.tool]){od.prog++;orderCheck()}}
 addXp(1);
 });
 bus.on('shatter',()=>sfxShatter());
@@ -1897,15 +2131,16 @@ let g=RAR[d.r].gold*(isNew?2:1)+CONFIG.gold.clear,x=RAR[d.r].xp+20;
 if(ball.cfg.boss!==undefined){g*=2;x*=2;save.stats.bosses[ball.cfg.boss]++;unlock('boss1')}
 save.gold+=g;round.gold+=g;round.xp+=x;
 save.stats.balls++;
+orderReveal(d.r,isNew);
 showItemCard(id,isNew);sfxReveal(d.r);vib(d.r>=2?[30,40,30,40,80]:[30,40,40]);
 say(d.r===3?'legend':d.r>=1?'rare':isNew?'newf':'dup');
 if(isNew){unlock('dex1');const n=dexCount();if(n>=10)unlock('dex10');if(n>=25)unlock('dex25');if(n>=40)unlock('dex40')}
 if(d.r>=1)unlock('rare');if(d.r>=2)unlock('epic');if(d.r>=3)unlock('legend');
 unlock('clear1');
 if(save.stats.balls>=10)unlock('balls10');
-if(!save.firstWin){save.firstWin=true;save.gold+=300;round.gold+=300;toast('🎉 첫 승리 보너스 +300 🪙','lvl');x+=60}
+if(!save.firstWin){save.firstWin=true;save.gold+=300;round.gold+=300;toast(t('firstBonus'),'lvl');x+=60}
 toast('+'+g+' 🪙  +'+x+' XP','ok');
-addXp(x);hudUpdate();persist();
+addXp(x);hudUpdate();checkAch();persist();
 });
 bus.on('done',()=>{});
 bus.on('frame',rdt=>{
@@ -1942,7 +2177,7 @@ window.addEventListener('keydown',()=>{if(state==='intro')setState('title')});
 
 Object.assign(CONFIG,{limits:{lights:4,maxChunks:110},gov:{windowMs:2000,badRatio:1.5,goodRatio:1.12,downStep:0.12,upStep:0.08,upAfter:5}});
 Object.assign(I18N.ko,{settings:'설정',set_master:'마스터 볼륨',set_bgm:'BGM 볼륨',set_sfx:'효과음 볼륨',set_vibration:'진동',set_quality:'그래픽 품질',set_fps:'프레임 제한',set_res:'해상도 스케일',set_shadows:'그림자',set_particles:'파티클 양',set_shake:'화면 흔들림',set_sens:'감도',set_joySize:'조이스틱 크기',set_joyX:'조이스틱 가로 위치',set_joyY:'조이스틱 세로 위치',set_joyInvert:'조이스틱 좌우 반전',set_oneHand:'한 손 모드',set_colorblind:'색약 모드',set_lang:'언어',set_showFps:'FPS 표시',g_sound:'사운드',g_graphics:'그래픽',g_control:'조작',g_access:'접근성 · 기타',g_keys:'PC 키 설정',g_data:'데이터',opt_low:'낮음',opt_medium:'보통',opt_high:'높음',opt_auto:'자동',opt_30:'30 FPS',opt_60:'60 FPS',opt_ko:'한국어',opt_en:'English',key_left:'왼쪽 회전',key_right:'오른쪽 회전',key_up:'위로 회전',key_down:'아래로 회전',key_hit:'타격 (꾹 누르면 드릴)',key_prev:'이전 도구',key_next:'다음 도구',key_pause:'일시정지',key_fs:'전체화면',pressKey:'키를 눌러줘...',keysReset:'키 기본값',photo:'촬영 모드',photoStart:'촬영 시작',resetData:'데이터 초기화',resetAsk:'진행 데이터와 설정이 전부 사라져. 진짜 지울래?',resetYes:'지울래',resetNo:'취소',exportSave:'세이브 내보내기',importSave:'세이브 가져오기',copied:'복사했어!',importOk:'가져왔어!',importFail:'세이브가 이상해서 못 읽었어 ㅋㅋ',shortcuts:'단축키',keysTitle:'단축키 안내',keysExtra:'1~4 도구 선택 · 마우스 드래그 볼 회전 · 클릭 타격 · P 촬영 모드',errTitle:'앗, 공장 기계가 멈췄어 ㅋㅋ',restart:'다시 시작',settingsBtn:'⚙ 설정',noVib:'이 기기는 진동을 지원하지 않아',pasteHere:'여기에 붙여넣기',photoExit:'나가기',guide:'9:16',angle:'각도',slow:'0.3x',tool:'도구'});
-Object.assign(I18N.en,{settings:'Settings',set_master:'Master volume',set_bgm:'BGM volume',set_sfx:'SFX volume',set_vibration:'Vibration',set_quality:'Graphics quality',set_fps:'Frame limit',set_res:'Resolution scale',set_shadows:'Shadows',set_particles:'Particle amount',set_shake:'Screen shake',set_sens:'Sensitivity',set_joySize:'Joystick size',set_joyX:'Joystick X position',set_joyY:'Joystick Y position',set_joyInvert:'Invert joystick X',set_oneHand:'One-hand mode',set_colorblind:'Colorblind mode',set_lang:'Language',set_showFps:'Show FPS',g_sound:'Sound',g_graphics:'Graphics',g_control:'Controls',g_access:'Access and more',g_keys:'PC key bindings',g_data:'Data',opt_low:'Low',opt_medium:'Medium',opt_high:'High',opt_auto:'Auto',opt_30:'30 FPS',opt_60:'60 FPS',opt_ko:'한국어',opt_en:'English',key_left:'Rotate left',key_right:'Rotate right',key_up:'Rotate up',key_down:'Rotate down',key_hit:'Strike (hold to drill)',key_prev:'Previous tool',key_next:'Next tool',key_pause:'Pause',key_fs:'Fullscreen',pressKey:'Press a key...',keysReset:'Reset keys',photo:'Photo mode',photoStart:'Start photo mode',resetData:'Reset data',resetAsk:'All progress and settings will be wiped. Really?',resetYes:'Wipe it',resetNo:'Cancel',exportSave:'Export save',importSave:'Import save',copied:'Copied!',importOk:'Imported!',importFail:'That save looks broken lol',shortcuts:'Shortcuts',keysTitle:'Shortcuts',keysExtra:'1-4 pick tool · drag mouse to rotate ball · click to strike · P photo mode',errTitle:'The factory machine stopped lol',restart:'Restart',settingsBtn:'⚙ Settings',noVib:'This device has no vibration',pasteHere:'Paste here',photoExit:'Exit',guide:'9:16',angle:'Angle',slow:'0.3x',tool:'Tool'});
+Object.assign(I18N.en,{settings:'Settings',set_master:'Master volume',set_bgm:'BGM volume',set_sfx:'SFX volume',set_vibration:'Vibration',set_quality:'Graphics quality',set_fps:'Frame limit',set_res:'Resolution scale',set_shadows:'Shadows',set_particles:'Particle amount',set_shake:'Screen shake',set_sens:'Sensitivity',set_joySize:'Joystick size',set_joyX:'Joystick X position',set_joyY:'Joystick Y position',set_joyInvert:'Invert joystick X',set_oneHand:'One-hand mode',set_colorblind:'Colorblind mode',set_lang:'Language',set_showFps:'Show FPS',g_sound:'Sound',g_graphics:'Graphics',g_control:'Controls',g_access:'Access and more',g_keys:'PC key bindings',g_data:'Data',opt_low:'Low',opt_medium:'Medium',opt_high:'High',opt_auto:'Auto',opt_30:'30 FPS',opt_60:'60 FPS',opt_ko:'한국어',opt_en:'English',key_left:'Rotate left',key_right:'Rotate right',key_up:'Rotate up',key_down:'Rotate down',key_hit:'Strike (hold to drill)',key_prev:'Previous tool',key_next:'Next tool',key_pause:'Pause',key_fs:'Fullscreen',pressKey:'Press a key...',keysReset:'Reset keys',photo:'Photo mode',photoStart:'Start photo mode',resetData:'Reset data',resetAsk:'All progress and settings will be wiped. Really?',resetYes:'Wipe it',resetNo:'Cancel',exportSave:'Export save',importSave:'Import save',copied:'Copied!',importOk:'Imported!',importFail:'That save looks broken',shortcuts:'Shortcuts',keysTitle:'Shortcuts',keysExtra:'1-4 pick tool · drag mouse to rotate ball · click to strike · P photo mode',errTitle:'The factory machine stopped',restart:'Restart',settingsBtn:'⚙ Settings',noVib:'This device has no vibration',pasteHere:'Paste here',photoExit:'Exit',guide:'9:16',angle:'Angle',slow:'0.3x',tool:'Tool'});
 const SET_UI=[
 {g:'sound',items:[['master','range',0,100,5],['bgm','range',0,100,5],['sfx','range',0,100,5],['vibration','bool']]},
 {g:'graphics',items:[['quality','sel',['auto','low','medium','high']],['fps','sel',['auto','30','60']],['res','range',50,100,5],['shadows','bool'],['particles','range',25,150,5],['shake','range',0,100,5]]},
@@ -1996,14 +2231,13 @@ body.appendChild(el('h3','sgh',t('photo')));
 const pb=el('button','btn',t('photoStart'));
 pb.addEventListener('click',()=>{closeSettings();startPhoto()});
 body.appendChild(pb);
-body.appendChild(el('h3','sgh',t('g_data')));
+if(curSlot>0){body.appendChild(el('h3','sgh',t('g_data')));
 const xa=el('textarea','xfer');xa.placeholder=t('pasteHere');xa.rows=3;
 const r1=el('div','row');
 const eb=el('button','btn alt',t('exportSave'));
 eb.addEventListener('click',()=>{
-save.s=settingsSnap();
 let str='';
-try{str=btoa(unescape(encodeURIComponent(JSON.stringify(save))))}catch(e){str=''}
+try{str=btoa(unescape(encodeURIComponent(JSON.stringify(Object.assign({},save,{s:settingsSnap()})))))}catch(e){str=''}
 xa.value=str;
 if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(str).then(()=>toast(t('copied'),'ok')).catch(()=>{});
 else{xa.select();try{document.execCommand('copy');toast(t('copied'),'ok')}catch(e){}}
@@ -2019,9 +2253,9 @@ r1.appendChild(eb);r1.appendChild(ib);
 body.appendChild(r1);body.appendChild(xa);
 const rb=el('button','btn hot',t('resetData'));
 rb.addEventListener('click',()=>{
-modal(t('resetData'),t('resetAsk'),[{label:t('resetYes'),cls:'hot',fn:()=>{replaceSave(defaultSave(),true);renderSettings()}},{label:t('resetNo'),cls:'alt'}]);
+modal(t('resetData'),t('resetAsk'),[{label:t('resetYes'),cls:'hot',fn:()=>{replaceSave(defaultSave(),false);renderSettings()}},{label:t('resetNo'),cls:'alt'}]);
 });
-body.appendChild(rb);
+body.appendChild(rb);}
 }
 bus.rebind=e=>{
 if(!rebindAction)return false;
@@ -2038,7 +2272,7 @@ renderSettings();
 return true;
 };
 function replaceSave(d,resetSettings){
-save.gold=d.gold;save.xp=d.xp;
+save.gold=d.gold;save.xp=d.xp;save.ts=d.ts;
 for(const k in save.tools)save.tools[k]=d.tools[k];
 save.dex=d.dex;save.ach=d.ach;save.rooms=d.rooms;save.stats=d.stats;save.daily=d.daily;save.firstWin=d.firstWin;
 if(resetSettings){const sd=JSON.parse(JSON.stringify(S_DEFAULT));for(const k in sd)S[k]=sd[k];save.s=null}
@@ -2112,7 +2346,7 @@ $('btnPSlow').addEventListener('click',()=>{timeCtl.photoSlow=!timeCtl.photoSlow
 $('btnPGuide').addEventListener('click',()=>{photo.guide=!photo.guide;$('safeFrame').style.display=photo.guide?'block':'none';sfxClick()});
 $('btnPTool').addEventListener('click',()=>{
 let i=TO.indexOf(curTool);
-for(let n=0;n<TO.length;n++){i=(i+1)%TO.length;if(!broken[TO[i]]){selectTool(TO[i]);break}}
+for(let n=0;n<TO.length;n++){i=(i+1)%TO.length;if(!broken[TO[i]]&&!toolLocked(TO[i])){selectTool(TO[i]);break}}
 sfxClick();
 });
 $('btnPExit').addEventListener('click',()=>{exitPhoto();sfxClick()});
@@ -2187,8 +2421,49 @@ document.getElementById('app').appendChild(box);
 S.showFps=true;fpsBox.style.display='block';
 }
 
+Object.assign(I18N.ko,{
+title:'왁스볼 공장',tag:'단단한 왁스를 깨고, 안에 든 물건을 꺼내 모으는 공장입니다.',play:'게임 시작',start:'출근하기',resume:'계속하기',pause:'일시정지',quit:'타이틀로',result:'정산',again:'한 판 더',next:'다음 볼',ballWord:'볼',
+slotTitle:'세이브 슬롯',slotHint:'기록을 저장할 슬롯을 선택해 주세요.',slotEmpty:'빈 슬롯',slotNew:'새로 시작',slotDel:'삭제',slotDelAsk:'슬롯 {n}의 기록이 모두 지워지며 되돌릴 수 없습니다. 삭제할까요?',slotCorrupt:'손상된 데이터',back:'뒤로',slotChange:'슬롯 변경',slotName:'슬롯 {n}',slotRounds:'{n}회 근무',
+toolOpen:'{tool} 사용 가능',ordTitle:'작업 지시서',ordDone:'지시서 완료',firstBonus:'🎉 첫 근무 완료 보너스 +300 🪙',
+tab_rooms:'작업장',daily:'🎁 출근 보너스',dailyTitle:'출근 도장',dailyBody:'{n}일 연속 출근입니다. +{g} 🪙 지급합니다.',
+adTitle:'도구가 부러졌어요',adAsk:'광고를 보면 {tool}을(를) 새것으로 교체해 드립니다.',adWatch:'광고 보기',adGold:'{g} 🪙로 수리',adBare:'맨손으로 계속',repaired:'{tool} 교체 완료',noGold:'골드가 부족해요',
+best:'이번 근무 최고의 발견',clearedLbl:'완료한 볼',effect:'레벨당 데미지 +22% · 내구도 +20%',adLabel:'AD · 가짜 광고 (연출용)',adDone:'시청 완료. 보상을 받으세요.',adArt:'초강력 왁스 용해기',adArt2:'지금 안 사면 후회합니다 (사실 아님)',skipHint:'터치하면 건너뜁니다',timeUp:'퇴근 시간입니다',
+saveFail:'저장소를 쓸 수 없어 임시 메모리로 진행합니다',savedReset:'저장 데이터가 손상되어 새로 시작합니다',loadingTxt:'왁스를 데우는 중...',
+pressKey:'키를 눌러 주세요...',resetAsk:'이 슬롯의 진행 데이터가 모두 지워집니다. 계속할까요?',resetYes:'지우기',copied:'복사했어요',importOk:'가져왔어요',importFail:'세이브 형식이 올바르지 않아요',errTitle:'공장 기계가 멈췄어요',noVib:'이 기기는 진동을 지원하지 않아요',keysExtra:'1~6 도구 선택 · 마우스 드래그로 볼 회전 · 클릭으로 타격 · P 촬영 모드'
+});
+Object.assign(I18N.en,{
+play:'Start',slotTitle:'Save Slots',slotHint:'Choose a slot to save your progress.',slotEmpty:'Empty slot',slotNew:'Start new',slotDel:'Delete',slotDelAsk:'Everything in slot {n} will be erased for good. Delete it?',slotCorrupt:'Corrupted data',back:'Back',slotChange:'Change slot',slotName:'Slot {n}',slotRounds:'{n} shifts',
+toolOpen:'{tool} unlocked',ordTitle:'Work order',ordDone:'Order complete',firstBonus:'🎉 First shift bonus +300 🪙',tag:'Crack the wax, collect what is inside. A tidy little factory.',
+resetAsk:'All progress in this slot will be wiped. Continue?',resetYes:'Wipe it'
+});
+Object.assign(QUIP.ko,{
+start:['오늘도 출근하셨군요. 왁스가 기다리고 있습니다.','작업 시작입니다. 손목 상태는 괜찮으신가요?','오늘 할당량은 볼 네 개입니다.'],
+first:['첫 타격, 느낌이 좋습니다.','금이 갔어요. 이제 시간문제입니다.'],
+combo:['콤보가 이어지고 있어요. 리듬을 유지하세요.','좋은 흐름입니다. 멈추지 마세요.'],
+fever:['피버 타임입니다. 지금이 수확기예요.'],
+broken:['도구가 부러졌습니다. 품질 검수는 어디에…','내구도 관리도 업무의 일부예요.'],
+clear:['마지막 조각입니다. 숨을 고르세요.'],
+idle:['손이 멈췄어요. 왁스가 식고 있습니다.','작업 중이시죠? 화면이 조용하네요.'],
+tut:['아래 🔨 망치도 써 보세요. 한 방이 다릅니다.','핀셋은 금 간 조각을 깔끔하게 떼어내요.'],
+newf:['도감에 새 항목이 추가됐어요.','처음 보는 물건이네요.'],
+dup:['이미 가진 물건이에요. 재고가 늘었습니다.','익숙한 얼굴이네요.'],
+rare:['레어 등급입니다. 오늘 운이 좋은데요.','품질 검수팀이 놀랄 만한 물건이에요.'],
+legend:['전설 등급이에요. 이건 기록해 두어야 합니다.'],
+bossIntro:['보스볼입니다. 층이 꽤 두껍네요.','여러 겹이에요. 차근차근 벗기세요.'],
+timeup:['퇴근 시간입니다. 정산하겠습니다.'],
+good:['오늘 성과가 훌륭했어요. 수당이 나옵니다.'],
+bad:['아쉬운 하루였어요. 내일은 더 부숴 봐요.']
+});
+{
+const IK=['한쪽만 남은 양말','건전지 없는 리모컨','먼지 뭉치 과장','꺾인 빨대','잃어버린 단추','꼬인 클립','반쪽 지우개','도토리 모자','정체불명 열쇠','출처 불명의 동전','닳아버린 칫솔','이빨 자국 난 연필','고무 오리','점 하나 모자란 주사위','식어버린 풍선껌','작은 머핀','짝 잃은 숟가락','작은 방울','주머니 속 돌멩이','화분 선인장','한 칸짜리 블록','칵테일 우산','장난감 눈알','별사탕','동그란 안경','기울어진 나침반','종이배','장난감 로켓','작은 해골','장난감 기차','모래시계','행운의 고양이','수정 구슬','기울어진 왕관','수상한 램프','소형 로봇','작은 보물상자','소형 비행접시','황금 오리 대표님','어린 왁스 드래곤'];
+for(let i=0;i<IK.length;i++)ITEMS[i].ko=IK[i];
+const AK={hit:'첫 타격',piece:'첫 조각 분리',dex1:'첫 발견',clear1:'첫 볼 완료',combo20:'콤보 20',fever:'피버 돌입',broke:'도구 파손',ad:'광고 시청',rare:'레어 발견',epic:'에픽 발견',legend:'전설 발견',dex10:'도감 10종',dex25:'도감 25종',dex40:'도감 40종',balls10:'공장 10볼',boss1:'보스볼 격파',room:'새 작업장 해금',lv5:'Lv5 달성'};
+for(let i=0;i<ACH.length;i++)if(AK[ACH[i].id])ACH[i].ko=AK[ACH[i].id];
+ROOMS[0].ko='작업대 구역';ROOMS[1].ko='야간 창고';ROOMS[2].ko='유리 온실';
+BOSS[0].ko='거대 말랑볼';BOSS[1].ko='다겹 양파볼';BOSS[2].ko='공장장의 볼';
+}
 boot();
-if(new URLSearchParams(location.search).get('debug')==='1')window.__wax={tool:()=>curTool,photoOn:()=>photo.on,holdN:()=>holds.length,autoAssist,openMenu,claimDaily,brokenPopup,bossPopup,save,showRewardAd,ITEMS,toast,applyRoom,levelInfo,S,CONFIG,ball,state:()=>state,phase:()=>phase,combo,round,loose,startRound,debN:()=>debN,pointers,pressAt,releaseP,moveP,renderer,setState,selectTool,nextBall,info:()=>({tier:qTier,pr:prCur,fps:1000/fpsEMA,cpuMs:cpuEMA,cpuMax:cpuMax,resetCpu:()=>{cpuMax=0},left:ball.left,total:ball.total,debN,loose:loose.length,geo:renderer.info.memory.geometries,tex:renderer.info.memory.textures,calls:renderer.info.render.calls,tris:renderer.info.render.triangles})};
+if(new URLSearchParams(location.search).get('debug')==='1')window.__wax={setItem,itemGroup,enterSlot,readSlot,setTitleView,titleView:()=>titleView,curSlot:()=>curSlot,curLv:()=>curLv,rollOrder,checkAch,ORD,tool:()=>curTool,photoOn:()=>photo.on,holdN:()=>holds.length,autoAssist,openMenu,claimDaily,brokenPopup,bossPopup,save,showRewardAd,ITEMS,toast,applyRoom,levelInfo,S,CONFIG,ball,state:()=>state,phase:()=>phase,combo,round,loose,startRound,debN:()=>debN,pointers,pressAt,releaseP,moveP,renderer,setState,selectTool,nextBall,info:()=>({tier:qTier,pr:prCur,fps:1000/fpsEMA,cpuMs:cpuEMA,cpuMax:cpuMax,resetCpu:()=>{cpuMax=0},left:ball.left,total:ball.total,debN,loose:loose.length,geo:renderer.info.memory.geometries,tex:renderer.info.memory.textures,calls:renderer.info.render.calls,tris:renderer.info.render.triangles})};
 </script>
 </body>
 </html>
