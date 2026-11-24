@@ -208,6 +208,43 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-b
 #scrResult.rush #shareRow{display:flex}
 #scrResult.rush #btnResWork{display:none}
 @media (max-height:480px){#scrResult.rush{overflow-y:auto;justify-content:safe center;gap:calc(4 * var(--u))}#scrResult.rush h2{display:none}.rsc{margin-bottom:0}.rsc .rs{font-size:calc(38 * var(--u))}.rsc .rk{font-size:calc(13 * var(--u))}#scrResult.rush .bestcard{padding:calc(6 * var(--u)) calc(18 * var(--u))}#scrResult.rush .bestcard .bt{display:none}#scrResult.rush .bestcard .ie{font-size:calc(30 * var(--u))}#scrResult.rush .fort{font-size:calc(12 * var(--u));margin-top:calc(2 * var(--u))}#scrResult.rush .quit{display:none}#scrResult.rush .chips{display:none}#scrResult.rush .stats{margin-top:0}}
+
+.ic{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.2em}
+.ic.gold{color:#ffc93c}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4em}
+.btn .ic{width:1.2em;height:1.2em}
+.chip .ic{width:1.1em;height:1.1em}
+#comboRow .fl{color:#ff9a3c;width:calc(22 * var(--u));height:calc(22 * var(--u));filter:drop-shadow(0 0 calc(5 * var(--u)) #ff7a1a)}
+#rushHud .rt,#rushHud .rsx{display:flex;align-items:center;gap:calc(6 * var(--u))}
+#rushHud .rt .ic{width:calc(26 * var(--u));height:calc(26 * var(--u));color:#fff3d6}
+#rushHud.low .rt .ic{color:#ff6b5c}
+.steps{display:flex;align-items:center;justify-content:center;gap:calc(4 * var(--u));margin-top:calc(12 * var(--u))}
+.steps .st{display:flex;flex-direction:column;align-items:center;gap:calc(5 * var(--u));width:calc(84 * var(--u));padding:calc(9 * var(--u)) calc(4 * var(--u));border-radius:calc(14 * var(--u));background:rgba(255,255,255,.1);border:1px solid rgba(255,217,160,.28);font-size:calc(12 * var(--u));font-weight:800;word-break:keep-all}
+.steps .st .ic{width:calc(26 * var(--u));height:calc(26 * var(--u));color:#ffd9a0}
+.steps .chv{width:calc(16 * var(--u));height:calc(16 * var(--u));color:#ffd9a0;opacity:.7}
+.cv-q{position:absolute;pointer-events:none;width:calc(46 * var(--u));height:calc(46 * var(--u));border-radius:50%;display:grid;place-items:center;background:linear-gradient(#ffb36b,#ff6b5c);color:#fff;box-shadow:0 calc(6 * var(--u)) calc(16 * var(--u)) rgba(0,0,0,.4);animation:qfl 2.4s ease-in-out infinite}
+.cv-q .ic{width:60%;height:60%}
+.cv-q.q1{left:14%;top:38%}
+.cv-q.q2{right:12%;top:33%;width:calc(38 * var(--u));height:calc(38 * var(--u));animation-delay:-.8s}
+.cv-q.q3{right:24%;top:52%;width:calc(32 * var(--u));height:calc(32 * var(--u));animation-delay:-1.6s}
+@keyframes qfl{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(calc(-12 * var(--u))) rotate(6deg)}}
+.screen:not(.cv) .cv-q{display:none}
+.slotmain .sn{position:relative;width:calc(44 * var(--u));height:calc(44 * var(--u));display:grid;place-items:center;font-size:calc(16 * var(--u))}
+.slotmain .sn .ic{width:100%;height:100%}
+.slotmain .sn i{position:absolute;font-style:normal;font-weight:900;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+.slot.empty .sn{opacity:.7}
+.slotmain .ss .ic{width:1em;height:1em;vertical-align:-.15em}
+.rsc .rk{display:inline-flex;align-items:center;gap:calc(6 * var(--u))}
+.rsc .stars{display:flex;gap:calc(2 * var(--u));color:#ffd166;font-size:calc(14 * var(--u))}
+.rsc .nb .ic{color:#ffd166}
+.qg{display:flex;align-items:center;gap:calc(8 * var(--u));margin-top:calc(4 * var(--u));color:#ffd166;font-weight:900;font-size:calc(14 * var(--u))}
+.qg .qb{flex:1;min-width:calc(150 * var(--u));height:calc(10 * var(--u));border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.qg .qb i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#ffd166,#ff5a5a)}
+.stats .ic{width:1.1em;height:1.1em}
+.cv-banner .ic{color:#ffd166}
+.hub-dock .row .btn{padding:0 calc(10 * var(--u));font-size:calc(14 * var(--u))}
+@media (max-width:400px){#topbar .chip{padding:calc(5 * var(--u)) calc(9 * var(--u));font-size:calc(13 * var(--u));gap:calc(4 * var(--u))}#topbar{gap:calc(4 * var(--u))}}
+@media (max-height:480px){.steps{display:none}.cv-q{display:none}#scrResult.rush .qg{display:none}}
 </style>
 </head>
 <body>
@@ -218,28 +255,60 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-b
 <div id="safeFrame"></div>
 <div id="photoBar"><button class="btn alt sq" id="btnPAng">🎥</button><button class="btn alt sq" id="btnPSlow">🐢</button><button class="btn alt sq" id="btnPGuide">▯</button><button class="btn alt sq" id="btnPTool">🔧</button><button class="btn alt sq" id="btnPExit">✕</button></div>
 <div id="fpsBox"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4v16l13-8z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
+<symbol id="i-keys" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M7 14h10"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="m21 16-5-5-9 9"/></symbol>
+<symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="6" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="1.8"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2c1 4 5 5.5 5 11a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-3-1-6 1-10z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v1a4 4 0 0 0 4 4M16 6h4v1a4 4 0 0 1-4 4M12 13v4M8 21h8M10 17h4"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2zM4 19a2 2 0 0 1 2-2h13"/></symbol>
+<symbol id="i-hammer" viewBox="0 0 24 24"><path d="M14 4l6 6-3 3-6-6zM12 9 4 17a2 2 0 0 0 3 3l8-8"/></symbol>
+<symbol id="i-crown" viewBox="0 0 24 24"><path d="M3 8l4 4 5-7 5 7 4-4-2 11H5z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M12 9v12M3 13h18M12 9C9 9 7 7.500 8 6s4 0 4 3zm0 0c3 0 5-1.500 4-3s-4 0-4 3z"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .8-5.200 4.800 1.500 7L12 17.800 5.700 21.200l1.500-7L2 9.400l7-.8z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="currentColor" fill-opacity=".28"/><path d="M7 9a6 6 0 0 1 5-3M16 14l-2 3"/></symbol>
+<symbol id="i-q" viewBox="0 0 24 24"><path d="M8.500 9a3.500 3.500 0 1 1 5 3.100c-1 .6-1.500 1.200-1.500 2.400M12 18.500h.01" stroke-width="3"/></symbol>
+<symbol id="i-tap" viewBox="0 0 24 24"><path d="M9 11V5a1.500 1.500 0 0 1 3 0v5M12 10V8.500a1.500 1.500 0 0 1 3 0V11M15 11v-.5a1.500 1.500 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-5-3l-2-3.500a1.500 1.500 0 0 1 2.400-1.700L9 15"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke-width="3"/></symbol>
+<symbol id="i-slots" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1.500"/><rect x="3" y="10" width="18" height="4" rx="1.500"/><rect x="3" y="16" width="18" height="4" rx="1.500"/></symbol>
+<symbol id="i-medal" viewBox="0 0 24 24"><circle cx="12" cy="9" r="6" fill="currentColor" fill-opacity=".3"/><path d="M8.500 14 7 22l5-3 5 3-1.500-8"/></symbol>
+<symbol id="i-door" viewBox="0 0 24 24"><path d="M5 3h9v18H5zM14 12h7M18 9l3 3-3 3"/></symbol>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11 12 3l9 8M5 10v10h14V10"/></symbol>
+<symbol id="i-again" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.300 6M20 4v7h-7"/></symbol>
+<symbol id="i-photo" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13" r="3.500"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+</defs></svg>
 <div id="hud">
 <div id="topbar">
-<div id="leftInfo"><div class="chip">🪙 <span id="goldTxt">0</span></div><div class="chip" id="lvChip"><span id="lvTxt">Lv 1</span></div></div>
-<div class="chip" id="ballTxt">1/4</div>
+<div id="leftInfo"><div class="chip"><svg class="ic gold"><use href="#i-coin"/></svg><span id="goldTxt">0</span></div><div class="chip" id="lvChip"><span id="lvTxt">Lv 1</span></div></div>
+<div class="chip"><svg class="ic"><use href="#i-ball"/></svg><span id="ballTxt">1/4</span></div>
 <div id="topBtns"><button class="btn alt sq" id="btnFs" aria-label="fullscreen">⛶</button><button class="btn alt sq" id="btnPause" aria-label="pause">⏸</button></div>
 </div>
-<div id="rushHud"><b id="rushT">60</b><span id="rushS">0</span></div>
+<div id="rushHud"><div class="rt"><svg class="ic"><use href="#i-clock"/></svg><b id="rushT">60</b></div><div class="rsx"><svg class="ic gold"><use href="#i-star"/></svg><span id="rushS">0</span></div></div>
 <div id="midInfo">
-<div id="comboRow"><div id="comboNum">0</div><div id="comboBar"><i id="comboFill"></i></div></div>
+<div id="comboRow"><svg class="ic fl"><use href="#i-flame"/></svg><div id="comboNum">0</div><div id="comboBar"><i id="comboFill"></i></div></div>
 <div id="quip"></div>
 </div>
 <div id="itemCard"></div>
 <div id="joy"><i id="knob"></i></div>
 <div id="tools"></div>
-<button class="btn hot" id="btnNext" data-i18n="next">다음 볼</button>
+<button class="btn hot" id="btnNext"><svg class="ic"><use href="#i-next"/></svg><span data-i18n="next">다음 볼</span></button>
 </div>
 <div class="screen" id="scrIntro"><div class="cv-top"><div class="eyebrow">WAX BALL FACTORY</div><h1 class="cv-logo" data-i18n="title">왁스볼 공장</h1><div class="cv-rule"><i></i></div></div><p data-i18n="skipHint"></p></div>
-<div class="screen cv" id="scrCover"><div class="cv-top"><div class="eyebrow">WAX BALL FACTORY</div><h1 class="cv-logo" data-i18n="title">왁스볼 공장</h1><div class="cv-rule"><i></i></div><p class="cv-tag" data-i18n="tag"></p><div class="cv-banner" id="cvBanner"></div></div><div class="cv-bot"><button class="btn hot big cv-go pulse" id="btnRush" data-i18n="rushBtn"></button><button class="btn alt cv-go" id="btnPlay" data-i18n="play">게임 시작</button><div class="row"><button class="btn alt" id="btnCSet" data-i18n="settingsBtn"></button><button class="btn alt sq" id="btnCKeys" aria-label="shortcuts">⌨</button></div><div class="cv-ver">v1.1</div></div></div>
-<div class="screen" id="scrSlots"><h2 data-i18n="slotTitle"></h2><p class="slhint" data-i18n="slotHint"></p><div id="slotList"></div><div class="row"><button class="btn alt" id="btnSlotBack" data-i18n="back"></button></div></div>
-<div class="screen hub" id="scrTitle"><div class="hub-top"><div class="chip" id="hubInfo"></div><button class="btn alt" id="btnSlots" data-i18n="slotChange"></button></div><div class="hub-dock"><div class="row"><button class="btn hot big" id="btnStart" data-i18n="start">출근하기</button><button class="btn hot" id="btnRushH" data-i18n="rushBtnS"></button></div><div class="row"><button class="btn" id="btnBoss" data-i18n="bossBtn"></button><button class="btn alt" id="btnWork" data-i18n="workshop"></button><button class="btn alt" id="btnDexT" data-i18n="dex"></button></div><div class="row"><button class="btn hot pulse" id="btnDaily" data-i18n="daily"></button><button class="btn alt" id="btnSet" data-i18n="settingsBtn"></button><button class="btn alt sq" id="btnKeys" aria-label="shortcuts">⌨</button></div></div></div>
-<div class="screen" id="scrPause"><h2 data-i18n="pause">일시정지</h2><p class="dim" id="orderTxt"></p><div class="row"><button class="btn" id="btnResume" data-i18n="resume">계속하기</button></div><div class="row"><button class="btn alt" id="btnPSet" data-i18n="settingsBtn"></button><button class="btn alt" id="btnPPhoto" data-i18n="photo"></button><button class="btn alt sq" id="btnPKeys" aria-label="shortcuts">⌨</button></div><div class="row"><button class="btn alt" id="btnQuit" data-i18n="quit">타이틀로</button></div></div>
-<div class="screen" id="scrResult"><h2 data-i18n="result">정산</h2><div id="resultTxt"></div><div class="row" id="shareRow"><button class="btn hot" id="btnShare" data-i18n="shareBtn"></button><button class="btn alt" id="btnCopy" data-i18n="copyBtn"></button><button class="btn alt" id="btnSaveImg" data-i18n="saveImgBtn"></button></div><div class="row"><button class="btn hot" id="btnAgain" data-i18n="again">한 판 더</button><button class="btn alt" id="btnResWork" data-i18n="workshop"></button><button class="btn alt" id="btnToTitle" data-i18n="quit">타이틀로</button></div></div>
+<div class="screen cv" id="scrCover"><div class="cv-top"><div class="eyebrow">WAX BALL FACTORY</div><h1 class="cv-logo" data-i18n="title">왁스볼 공장</h1><div class="cv-rule"><i></i></div><p class="cv-tag" data-i18n="tag"></p><div class="steps"><div class="st"><svg class="ic"><use href="#i-tap"/></svg><span data-i18n="st1"></span></div><svg class="ic chv"><use href="#i-chev"/></svg><div class="st"><svg class="ic"><use href="#i-gift"/></svg><span data-i18n="st2"></span></div><svg class="ic chv"><use href="#i-chev"/></svg><div class="st"><svg class="ic"><use href="#i-share"/></svg><span data-i18n="st3"></span></div></div><div class="cv-banner" id="cvBanner"></div></div><div class="cv-q q1"><svg class="ic"><use href="#i-q"/></svg></div><div class="cv-q q2"><svg class="ic"><use href="#i-q"/></svg></div><div class="cv-q q3"><svg class="ic"><use href="#i-q"/></svg></div><div class="cv-bot"><button class="btn hot big cv-go pulse" id="btnRush"><svg class="ic"><use href="#i-bolt"/></svg><span data-i18n="rushBtn"></span></button><button class="btn alt cv-go" id="btnPlay"><svg class="ic"><use href="#i-play"/></svg><span data-i18n="play">게임 시작</span></button><div class="row"><button class="btn alt" id="btnCSet"><svg class="ic"><use href="#i-gear"/></svg><span data-i18n="settingsBtn"></span></button><button class="btn alt sq" id="btnCKeys" aria-label="shortcuts">⌨</button></div><div class="cv-ver">v1.1</div></div></div>
+<div class="screen" id="scrSlots"><h2 data-i18n="slotTitle"></h2><p class="slhint" data-i18n="slotHint"></p><div id="slotList"></div><div class="row"><button class="btn alt" id="btnSlotBack"><svg class="ic"><use href="#i-back"/></svg><span data-i18n="back"></span></button></div></div>
+<div class="screen hub" id="scrTitle"><div class="hub-top"><div class="chip" id="hubInfo"></div><button class="btn alt" id="btnSlots"><svg class="ic"><use href="#i-slots"/></svg><span data-i18n="slotChange"></span></button></div><div class="hub-dock"><div class="row"><button class="btn hot big" id="btnStart"><svg class="ic"><use href="#i-play"/></svg><span data-i18n="start">출근하기</span></button><button class="btn hot" id="btnRushH"><svg class="ic"><use href="#i-bolt"/></svg><span data-i18n="rushBtnS"></span></button></div><div class="row"><button class="btn" id="btnBoss"><svg class="ic"><use href="#i-crown"/></svg><span data-i18n="bossBtn"></span></button><button class="btn alt" id="btnWork"><svg class="ic"><use href="#i-hammer"/></svg><span data-i18n="workshop"></span></button><button class="btn alt" id="btnDexT"><svg class="ic"><use href="#i-book"/></svg><span data-i18n="dex"></span></button></div><div class="row"><button class="btn hot pulse" id="btnDaily"><svg class="ic"><use href="#i-gift"/></svg><span data-i18n="daily"></span></button><button class="btn alt" id="btnSet"><svg class="ic"><use href="#i-gear"/></svg><span data-i18n="settingsBtn"></span></button><button class="btn alt sq" id="btnKeys" aria-label="shortcuts">⌨</button></div></div></div>
+<div class="screen" id="scrPause"><h2 data-i18n="pause">일시정지</h2><p class="dim" id="orderTxt"></p><div class="row"><button class="btn" id="btnResume"><svg class="ic"><use href="#i-play"/></svg><span data-i18n="resume">계속하기</span></button></div><div class="row"><button class="btn alt" id="btnPSet"><svg class="ic"><use href="#i-gear"/></svg><span data-i18n="settingsBtn"></span></button><button class="btn alt" id="btnPPhoto"><svg class="ic"><use href="#i-photo"/></svg><span data-i18n="photo"></span></button><button class="btn alt sq" id="btnPKeys" aria-label="shortcuts">⌨</button></div><div class="row"><button class="btn alt" id="btnQuit"><svg class="ic"><use href="#i-home"/></svg><span data-i18n="quit">타이틀로</span></button></div></div>
+<div class="screen" id="scrResult"><h2 data-i18n="result">정산</h2><div id="resultTxt"></div><div class="row" id="shareRow"><button class="btn hot" id="btnShare"><svg class="ic"><use href="#i-share"/></svg><span data-i18n="shareBtn"></span></button><button class="btn alt" id="btnCopy"><svg class="ic"><use href="#i-link"/></svg><span data-i18n="copyBtn"></span></button><button class="btn alt" id="btnSaveImg"><svg class="ic"><use href="#i-image"/></svg><span data-i18n="saveImgBtn"></span></button></div><div class="row"><button class="btn hot" id="btnAgain"><svg class="ic"><use href="#i-again"/></svg><span data-i18n="again">한 판 더</span></button><button class="btn alt" id="btnResWork"><svg class="ic"><use href="#i-hammer"/></svg><span data-i18n="workshop"></span></button><button class="btn alt" id="btnToTitle"><svg class="ic"><use href="#i-home"/></svg><span data-i18n="quit">타이틀로</span></button></div></div>
 <div class="screen" id="scrMenu"><div class="panel"><div class="phead"><b data-i18n="workshop"></b><span class="chip">🪙 <span id="menuGold">0</span></span><button class="btn alt sq" id="menuClose">✕</button></div><div class="row" id="menuTabs"></div><div id="menuBody"></div></div></div>
 <div class="screen" id="scrError"><h2 id="errTitle">앗, 공장 기계가 멈췄어 ㅋㅋ</h2><p id="errTxt"></p><div class="row"><button class="btn hot" id="btnRestart">다시 시작</button></div></div>
 <div class="screen" id="scrSettings"><div class="panel"><div class="phead"><b data-i18n="settings"></b><button class="btn alt sq" id="setClose">✕</button></div><div id="setBody"></div></div></div>
@@ -1456,21 +1525,23 @@ storeDel(slotKey(n));
 if(curSlot===n){curSlot=0;replaceSave(defaultSave(),false)}
 renderSlots();
 }
+function IC(n,c){return'<svg class="ic'+(c?' '+c:'')+'"><use href="#i-'+n+'"/></svg>'}
+const SLOTCOL=['#7fd0ff','#ffb36b','#c79bff'];
 function renderSlots(){
 const list=$('slotList');list.innerHTML='';
 for(let n=1;n<=CONFIG.slots;n++){
 const r=readSlot(n);
 const card=el('div','slot'+(r.d?'':' empty'));
 const main=el('button','slotmain');
-let h='<span class="sn">'+n+'</span>';
-if(r.d){const d=r.d;h+='<span class="sl">'+t('lv')+' '+lvOf(d.xp)+(curSlot===n?' · '+t('using'):'')+'</span><span class="sd">'+fmtDate(d.ts)+'</span><span class="ss">🪙 '+d.gold+' · '+t('dex')+' '+Object.keys(d.dex).length+'/'+CONFIG.dexMax+' · '+t('slotRounds').replace('{n}',d.stats.rounds)+'</span>'}
+let h='<span class="sn" style="color:'+SLOTCOL[(n-1)%3]+'">'+(r.d?IC('ball')+'<i>'+n+'</i>':IC('plus'))+'</span>';
+if(r.d){const d=r.d;h+='<span class="sl">'+t('lv')+' '+lvOf(d.xp)+(curSlot===n?' · '+t('using'):'')+'</span><span class="sd">'+fmtDate(d.ts)+'</span><span class="ss">'+IC('coin','gold')+' '+d.gold+' · '+IC('book')+' '+Object.keys(d.dex).length+'/'+CONFIG.dexMax+' · '+IC('again')+' '+d.stats.rounds+'</span>'}
 else if(r.bad)h+='<span class="sl">'+t('slotCorrupt')+'</span><span class="ss">'+t('slotNew')+'</span>';
 else h+='<span class="sl">'+t('slotEmpty')+'</span><span class="ss">'+t('slotNew')+'</span>';
 main.innerHTML=h;
 main.addEventListener('click',()=>{sfxClick();enterSlot(n)});
 card.appendChild(main);
 if(!r.empty){
-const del=el('button','btn alt sq slotdel','🗑');
+const del=el('button','btn alt sq slotdel',IC('trash'));
 del.setAttribute('aria-label','delete');
 del.addEventListener('click',e=>{e.stopPropagation();sfxClick();modal(t('slotDel'),t('slotDelAsk').replace('{n}',n),[{label:t('slotDel'),cls:'hot',fn:()=>deleteSlot(n)},{label:t('resetNo'),cls:'alt'}])});
 card.appendChild(del);
@@ -2022,12 +2093,12 @@ modal(t('dailyTitle'),t('dailyBody').replace('{n}',streak).replace('{g}',g),[{la
 refreshTitle();
 }
 function refreshTitle(){
-$('cvBanner').textContent=chalScore>0?t('chalBanner').replace('{n}',chalScore.toLocaleString()):'';
+$('cvBanner').innerHTML=chalScore>0?IC('bolt')+' '+t('chalBanner').replace('{n}',chalScore.toLocaleString()):'';
 $('cvBanner').classList.toggle('on',chalScore>0);
-$('btnRush').textContent=t(chalScore>0?'rushAccept':'rushBtn');
+$('btnRush').querySelector('span').textContent=t(chalScore>0?'rushAccept':'rushBtn');
 $('btnDaily').style.display=dailyReady()?'':'none';
 const li=levelInfo();
-$('hubInfo').textContent=curSlot>0?t('slotName').replace('{n}',curSlot)+' · '+t('lv')+' '+li.lv+' · 🪙 '+save.gold:'';
+$('hubInfo').innerHTML=curSlot>0?IC('ball')+' '+t('slotName').replace('{n}',curSlot)+' · '+t('lv')+' '+li.lv+' · '+IC('coin','gold')+' '+save.gold:'';
 }
 function bossPopup(){
 const lv=levelInfo().lv;
@@ -2104,7 +2175,7 @@ itemCard.classList.add('on');
 function updateBallTxt(){
 const mx=round.mode==='rush'?RUSH.sec:CONFIG.round.maxSec,tm=Math.max(0,mx-Math.floor(round.t)),mm=Math.floor(tm/60),ss=tm%60;
 const ty=ball.cfg?TYPENAME[S.lang][ball.cfg.type]:'';
-if(round.mode==='rush'){ballTxt.textContent='⚡ '+t('ballWord')+' '+(round.idx+1);rushHudUpdate();return}
+if(round.mode==='rush'){ballTxt.textContent=t('ballWord')+' '+(round.idx+1);rushHudUpdate();return}
 ballTxt.textContent=(round.mode==='boss'?'👑 ':t('ballWord')+' ')+(round.idx+1)+'/'+round.total+' · '+ty+' · '+mm+':'+(ss<10?'0':'')+ss;
 }
 function showRushResult(){
@@ -2113,12 +2184,12 @@ const rb=parseInt(storeGet(RUSH.key),10)||0,isBest=round.score>rb;
 if(isBest)storeSet(RUSH.key,String(round.score));
 const best=round.items.slice().sort((a,b)=>(b.rar-a.rar)||((b.isNew?1:0)-(a.isNew?1:0)))[0];
 let mx=0;for(let i=0;i<round.items.length;i++)mx=Math.max(mx,round.items[i].rar);
-let h='<div class="rsc"><div class="rk">'+RANKN[S.lang][rankOf(round.score)]+'</div><div class="rs">'+round.score.toLocaleString()+'</div><div class="rl">'+t('rushScore')+'</div>';
-h+=isBest?'<div class="nb">'+t('newBest')+'</div>':'<div class="rl">'+t('bestScore').replace('{n}',rb.toLocaleString())+'</div>';
+let h='<div class="rsc"><div class="rk">'+IC('medal')+' '+RANKN[S.lang][rankOf(round.score)]+'</div><div class="stars">'+IC('star').repeat(rankOf(round.score)+1)+'</div><div class="rs">'+round.score.toLocaleString()+'</div><div class="rl">'+t('rushScore')+'</div>';
+h+=isBest?'<div class="nb">'+IC('trophy')+' '+t('newBest')+'</div>':'<div class="rl">'+t('bestScore').replace('{n}',rb.toLocaleString())+'</div>';
 if(chalScore>0){const df=Math.abs(round.score-chalScore);h+='<div class="ch">'+(round.score>chalScore?t('chalWin'):t('chalLose')).replace('{n}',chalScore.toLocaleString()).replace('{d}',df.toLocaleString())+'</div>'}
 h+='</div>';
-if(best){const d=ITEMS[best.id],fl=fortOf(best.id);h+='<div class="bestcard" style="--rc:var(--r'+d.r+')"><div class="bt">'+t('best')+'</div><div class="ie">'+d.e+'</div><div class="in">'+d[S.lang]+'</div><div class="ir">'+RAR[d.r].s+' '+rarName(d.r)+(best.isNew?' <span class="nw">'+t('newTag')+'</span>':'')+'</div>'+(fl?'<div class="fort">“'+fl+'”</div><div class="quit">'+t('quitLbl').replace('{n}',quitIdx(best.id))+'</div>':'')+'</div>'}
-h+='<div class="stats"><div>🔮 '+t('clearedLbl')+' '+round.cleared+'</div><div>⚡ '+t('comboMax')+' '+combo.max+'</div></div>';
+if(best){const d=ITEMS[best.id],fl=fortOf(best.id);h+='<div class="bestcard" style="--rc:var(--r'+d.r+')"><div class="bt">'+t('best')+'</div><div class="ie">'+d.e+'</div><div class="in">'+d[S.lang]+'</div><div class="ir">'+RAR[d.r].s+' '+rarName(d.r)+(best.isNew?' <span class="nw">'+t('newTag')+'</span>':'')+'</div>'+(fl?'<div class="fort">“'+fl+'”</div><div class="quit">'+t('quitName')+'</div><div class="qg">'+IC('door')+'<div class="qb"><i style="width:'+quitIdx(best.id)+'%"></i></div><b>'+quitIdx(best.id)+'%</b></div>':'')+'</div>'}
+h+='<div class="stats"><div>'+IC('ball')+' '+t('clearedLbl')+' '+round.cleared+'</div><div>'+IC('flame')+' '+t('comboMax')+' '+combo.max+'</div></div>';
 if(round.items.length>1){h+='<div class="chips">';for(let i=0;i<round.items.length;i++){const dd=ITEMS[round.items[i].id];h+='<span class="ichip" style="--rc:var(--r'+dd.r+')">'+dd.e+'</span>'}h+='</div>'}
 $('resultTxt').innerHTML=h;
 say(round.score>=5000?'good':'bad');
@@ -2133,7 +2204,7 @@ if(best){
 const d=ITEMS[best.id];
 h+='<div class="bestcard" style="--rc:var(--r'+d.r+')"><div class="bt">'+t('best')+'</div><div class="ie">'+d.e+'</div><div class="in">'+d[S.lang]+'</div><div class="ir">'+RAR[d.r].s+' '+rarName(d.r)+(best.isNew?' <span class="nw">'+t('newTag')+'</span>':'')+'</div></div>';
 }
-h+='<div class="stats"><div>🪙 +'+round.gold+'</div><div>⚡ '+t('comboMax')+' '+combo.max+'</div><div>🔮 '+t('clearedLbl')+' '+round.cleared+'/'+round.total+'</div><div>✨ '+t('xpGain')+' +'+round.xp+'</div></div>';
+h+='<div class="stats"><div>'+IC('coin','gold')+' +'+round.gold+'</div><div>'+IC('flame')+' '+t('comboMax')+' '+combo.max+'</div><div>'+IC('ball')+' '+t('clearedLbl')+' '+round.cleared+'/'+round.total+'</div><div>'+IC('star','gold')+' '+t('xpGain')+' +'+round.xp+'</div></div>';
 if(round.order)h+='<div class="ordline">'+orderLine()+'</div>';
 if(round.items.length){h+='<div class="chips">';for(let i=0;i<round.items.length;i++){const d=ITEMS[round.items[i].id];h+='<span class="ichip" style="--rc:var(--r'+d.r+')">'+d.e+'</span>'}h+='</div>'}
 $('resultTxt').innerHTML=h;
@@ -2623,6 +2694,9 @@ Object.assign(QUIP.en,{rushStart:['Tap to smash. The more you open in 60 seconds
 
 Object.assign(I18N.ko,{tag:'이 왁스볼 안에 뭐가 들었을까요? 60초 안에 깨고 오늘의 판정을 받으세요.',rushBtn:'⚡ 60초 안에 깨기',shareText2:"왁스볼을 깼더니 '{i}' 나왔습니다. 판정: {f} 당신 건 뭐가 나올까요?",quitLbl:'오늘의 퇴사 지수 {n}%',cardCta:'당신 왁스볼엔 뭐가 들었을까요?',best:'오늘의 물건'});
 Object.assign(QUIP.ko,{rushStart:['탭하면 부숩니다. 안에 뭐가 들었을까요?']});
+
+Object.assign(I18N.ko,{settingsBtn:'설정',daily:'출근 보너스',rushBtn:'60초 안에 깨기',rushBtnS:'60초',rushAccept:'도전 수락',shareBtn:'친구에게 도전장 보내기',copyBtn:'링크 복사',saveImgBtn:'카드 저장',chalBanner:'친구가 {n}점을 기록했습니다. 넘을 수 있을까요?',chalWin:'친구 기록 {n}점을 {d}점 차로 넘겼습니다',newBest:'최고 기록 갱신',st1:'탭해서 부수기',st2:'물건 발견',st3:'판정 공유',quitName:'오늘의 퇴사 지수',tag:'이 왁스볼 안에 뭐가 들었을까요?'});
+Object.assign(I18N.en,{settingsBtn:'Settings',daily:'Daily bonus',rushBtn:'60-Second Challenge',rushBtnS:'60s',rushAccept:'Accept Challenge',shareBtn:'Challenge a friend',copyBtn:'Copy link',saveImgBtn:'Save card',chalBanner:'A friend scored {n}. Can you beat it?',chalWin:'You beat their {n} by {d}',newBest:'New personal best',st1:'Tap to smash',st2:'Find an item',st3:'Share verdict',quitName:'Quit-o-meter today',tag:'What is inside this wax ball?'});
 
 boot();
 if(new URLSearchParams(location.search).get('debug')==='1')window.__wax={rushAdd,drawCard,shareUrl,shareText,startRush,rankOf,setItem,itemGroup,enterSlot,readSlot,setTitleView,titleView:()=>titleView,curSlot:()=>curSlot,curLv:()=>curLv,rollOrder,checkAch,ORD,tool:()=>curTool,photoOn:()=>photo.on,holdN:()=>holds.length,autoAssist,openMenu,claimDaily,brokenPopup,bossPopup,save,showRewardAd,ITEMS,toast,applyRoom,levelInfo,S,CONFIG,ball,state:()=>state,phase:()=>phase,combo,round,loose,startRound,debN:()=>debN,pointers,pressAt,releaseP,moveP,renderer,setState,selectTool,nextBall,info:()=>({tier:qTier,pr:prCur,fps:1000/fpsEMA,cpuMs:cpuEMA,cpuMax:cpuMax,resetCpu:()=>{cpuMax=0},left:ball.left,total:ball.total,debN,loose:loose.length,geo:renderer.info.memory.geometries,tex:renderer.info.memory.textures,calls:renderer.info.render.calls,tris:renderer.info.render.triangles})};
