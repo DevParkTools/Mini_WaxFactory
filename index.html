@@ -202,10 +202,12 @@ html,body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;overscroll-b
 .rsc .rl{font-size:calc(13 * var(--u));opacity:.8}
 .rsc .nb{font-size:calc(14 * var(--u));font-weight:900;color:#ffd166}
 .rsc .ch{font-size:calc(14 * var(--u));font-weight:800;opacity:.92}
+.fort{margin-top:calc(8 * var(--u));font-size:calc(15 * var(--u));font-weight:800;line-height:1.45;max-width:calc(280 * var(--u));word-break:keep-all;text-wrap:balance;color:#fff3d6}
+.quit{margin-top:calc(6 * var(--u));font-size:calc(13 * var(--u));font-weight:900;color:#ffd166}
 #shareRow{display:none}
 #scrResult.rush #shareRow{display:flex}
 #scrResult.rush #btnResWork{display:none}
-@media (max-height:480px){#scrResult.rush{overflow-y:auto;justify-content:safe center;gap:calc(4 * var(--u))}#scrResult.rush h2{display:none}.rsc{margin-bottom:0}.rsc .rs{font-size:calc(38 * var(--u))}.rsc .rk{font-size:calc(13 * var(--u))}#scrResult.rush .bestcard{padding:calc(6 * var(--u)) calc(18 * var(--u))}#scrResult.rush .bestcard .bt{display:none}#scrResult.rush .bestcard .ie{font-size:calc(30 * var(--u))}#scrResult.rush .stats{margin-top:0}}
+@media (max-height:480px){#scrResult.rush{overflow-y:auto;justify-content:safe center;gap:calc(4 * var(--u))}#scrResult.rush h2{display:none}.rsc{margin-bottom:0}.rsc .rs{font-size:calc(38 * var(--u))}.rsc .rk{font-size:calc(13 * var(--u))}#scrResult.rush .bestcard{padding:calc(6 * var(--u)) calc(18 * var(--u))}#scrResult.rush .bestcard .bt{display:none}#scrResult.rush .bestcard .ie{font-size:calc(30 * var(--u))}#scrResult.rush .fort{font-size:calc(12 * var(--u));margin-top:calc(2 * var(--u))}#scrResult.rush .quit{display:none}#scrResult.rush .chips{display:none}#scrResult.rush .stats{margin-top:0}}
 </style>
 </head>
 <body>
@@ -821,7 +823,7 @@ let T=0;
 const timeCtl={scale:1,slowT:0,photoSlow:false};
 const combo={val:0,count:0,t:-99,fever:0,max:0};
 const round={gold:0,idx:0,total:4,items:[],ballGold:0,mode:'normal',boss:0,tut:false,xp:0,cleared:0,t:0,score:0};
-const RUSH={sec:60,rotate:0.9,auto:0.5,slow:0.5,key:'waxfactory.rushbest'};
+const RUSH={sec:60,rotate:1.5,auto:0.6,slow:0.5,key:'waxfactory.rushbest'};
 let phase='break',phaseT=0,curTool='hand',curLv=1;const toolLv=save.tools;
 const toolLocked=k=>(CONFIG.tools[k].lv||1)>curLv;
 const dur={},broken={},toolCd={};
@@ -1494,7 +1496,7 @@ applyRoom(save.rooms.cur);
 updateLv();
 toTitle();
 setState('intro');
-setTimeout(()=>{if(state==='intro')setState('title')},2600);
+setTimeout(()=>{if(state==='intro')setState('title')},900);
 if(saveCorrupt)toast(t('savedReset'),'bad');
 if(!storageOK)toast(t('saveFail'),'bad');
 $('boot').classList.add('off');
@@ -2115,8 +2117,9 @@ let h='<div class="rsc"><div class="rk">'+RANKN[S.lang][rankOf(round.score)]+'</
 h+=isBest?'<div class="nb">'+t('newBest')+'</div>':'<div class="rl">'+t('bestScore').replace('{n}',rb.toLocaleString())+'</div>';
 if(chalScore>0){const df=Math.abs(round.score-chalScore);h+='<div class="ch">'+(round.score>chalScore?t('chalWin'):t('chalLose')).replace('{n}',chalScore.toLocaleString()).replace('{d}',df.toLocaleString())+'</div>'}
 h+='</div>';
-if(best){const d=ITEMS[best.id];h+='<div class="bestcard" style="--rc:var(--r'+d.r+')"><div class="bt">'+t('best')+'</div><div class="ie">'+d.e+'</div><div class="in">'+d[S.lang]+'</div><div class="ir">'+RAR[d.r].s+' '+rarName(d.r)+(best.isNew?' <span class="nw">'+t('newTag')+'</span>':'')+'</div></div>'}
+if(best){const d=ITEMS[best.id],fl=fortOf(best.id);h+='<div class="bestcard" style="--rc:var(--r'+d.r+')"><div class="bt">'+t('best')+'</div><div class="ie">'+d.e+'</div><div class="in">'+d[S.lang]+'</div><div class="ir">'+RAR[d.r].s+' '+rarName(d.r)+(best.isNew?' <span class="nw">'+t('newTag')+'</span>':'')+'</div>'+(fl?'<div class="fort">“'+fl+'”</div><div class="quit">'+t('quitLbl').replace('{n}',quitIdx(best.id))+'</div>':'')+'</div>'}
 h+='<div class="stats"><div>🔮 '+t('clearedLbl')+' '+round.cleared+'</div><div>⚡ '+t('comboMax')+' '+combo.max+'</div></div>';
+if(round.items.length>1){h+='<div class="chips">';for(let i=0;i<round.items.length;i++){const dd=ITEMS[round.items[i].id];h+='<span class="ichip" style="--rc:var(--r'+dd.r+')">'+dd.e+'</span>'}h+='</div>'}
 $('resultTxt').innerHTML=h;
 say(round.score>=5000?'good':'bad');
 }
@@ -2190,6 +2193,19 @@ toast('+'+g+' 🪙  +'+x+' XP','ok');
 addXp(x);hudUpdate();checkAch();persist();
 });
 
+
+const FORT=["오늘 짝을 못 찾습니다. 업무도 마찬가지입니다.", "누르는 건 열심인데 반응이 없는 하루입니다.", "뭉쳐 있으면 대단해 보이지만 후 불면 끝입니다.", "꺾였지만 아직 마시는 데는 문제없습니다.", "중요한 순간에 떨어질 운세입니다. 옷을 점검하세요.", "오늘은 서류보다 감정이 더 꼬입니다.", "실수는 지워지지만 남은 반쪽이 부족합니다.", "모자는 있는데 도토리가 없습니다. 본론부터 챙기세요.", "어디 문인지 모르는 기회가 옵니다. 일단 꽂아 보세요.", "출처는 묻지 않는 게 좋은 돈이 들어옵니다.", "오래 쓴 만큼 정이 들었지만 교체 시기입니다.", "회의 중 불안이 연필에 남았습니다.", "문제를 말하면 해결됩니다. 오리에게라도요.", "하나가 모자란 운입니다. 그래도 굴려야 나옵니다.", "달콤함은 끝났고 씹는 것만 남았습니다. 버티세요.", "작지만 확실한 행복이 있습니다. 드세요.", "짝은 없어도 떠먹는 데는 지장 없습니다.", "작은 소리로도 상사가 찾아옵니다. 조용히 지내세요.", "주머니 속에서 쓸모를 못 찾는 하루입니다. 버리진 마세요.", "건드리면 찌릅니다. 오늘은 말을 아끼세요.", "한 칸만 쌓아도 성과입니다. 오늘은 그걸로 충분합니다.", "비는 안 오는데 분위기만 칵테일입니다. 퇴근 후 약속 주의.", "누가 지켜봅니다. 일단 일하는 척하세요.", "작은 보상이 옵니다. 대신 이를 조심하세요.", "오늘은 보고서의 오타가 선명하게 보입니다.", "방향이 틀렸는데 본인만 모릅니다. 지도를 보세요.", "출항은 완벽합니다. 비 오기 전에 도착하세요.", "갑작스러운 승진 소식이 있습니다. 소문일 수 있습니다.", "야근이 길어질 운세입니다. 영양제를 챙기세요.", "정해진 길로만 갑니다. 오늘은 그게 정답입니다.", "마감이 흘러내립니다. 지금 시작하세요.", "손짓하는 쪽으로 가세요. 복이 있습니다.", "내일 회의가 길어질 것이 보입니다.", "기울어졌어도 쓰고 있으면 왕입니다. 자신감이 운입니다.", "소원 셋 중 하나는 퇴근입니다. 신중히 고르세요.", "오늘은 감정 없이 일해야 이깁니다. 전원 유지.", "열기 전이 제일 설렙니다. 열어도 괜찮습니다.", "아무도 설명하지 못하는 지시가 내려옵니다. 따르세요.", "대표님이 나타났습니다. 오늘 점심은 얻어먹습니다.", "작지만 불을 뿜습니다. 오늘은 당신이 해결사입니다.", "한 입 남기고 간 점심입니다. 오늘은 바쁩니다.", "바닥까지 긁어 쓰는 근성이 보입니다. 월급날이 가깝습니다.", "한 짝만 있어도 손은 시립니다. 둘이 함께하세요.", "시큼한 말을 들어도 표정 관리가 필요합니다.", "끌리는 사람이 나타납니다. 상대가 서류일 수도 있습니다.", "오늘은 충전이 필요합니다. 점심에 눈을 붙이세요.", "마지막 한 칸까지 쓴 당신, 교체는 본인이 하세요.", "부서져도 맛은 같습니다. 완벽 말고 완료하세요.", "타다 만 열정입니다. 불씨는 아직 있습니다.", "급한 불은 끌 수 있습니다. 임시방편의 날입니다.", "앉기 전에 확인하세요. 의자와의 약속입니다.", "구겨져도 끝까지 빨아 먹는 근성이 있습니다.", "가을을 탑니다. 오늘 결정은 내일로 미루세요.", "올라갔다 내려옵니다. 컨디션도 업무도 그렇습니다.", "엉킨 선을 풀면 하루가 풀립니다.", "지금 이 순간은 현상해 봐야 압니다. 기대하지 마세요.", "시간이 멈췄습니다. 퇴근도 멈췄습니다.", "작게 연주하지만 사연은 큽니다. 공감받는 날입니다.", "실험적인 제안이 통과됩니다. 반응은 지켜보세요.", "엉켜도 바람이 불면 올라갑니다. 타이밍을 보세요.", "낡았지만 위로가 됩니다. 연락 한 번 하세요.", "찌그러져도 소리는 큽니다. 발표를 맡으세요.", "오늘은 남보다 자신을 먼저 보세요. 표정 점검.", "나쁜 일은 막아줍니다. 대신 좋은 일도 가끔 막습니다.", "한 짝으로 균형을 잡는 날입니다. 의외로 잘 갑니다.", "작은 악기로 분위기를 바꿉니다. 회식 때 대기하세요.", "두드릴수록 속이 시원합니다. 오늘은 키보드로 대신하세요.", "터지고 나서 쏟아집니다. 오늘의 인내가 보상받습니다.", "먼지만 닦으면 전성기입니다. 과거 성과를 꺼내세요.", "모든 문이 열립니다. 대신 책임도 따라옵니다.", "멀리 보면 퇴근이 보이고 가까이 보면 메일이 보입니다.", "웃고 있지만 속은 다릅니다. 오늘 연기상 후보입니다.", "위에서 지켜보는 상사가 옵니다. 프로펠러 소리에 주의.", "혼자 도는 것 같아도 고리가 있습니다. 주변이 있습니다.", "금이 가도 값어치는 있습니다. 쉬면서 이어 붙이세요.", "오늘 쏟아지는 말은 전부 막힙니다. 방어력 최고입니다.", "존재만으로 소문나는 날입니다. 오늘은 눈에 띄세요.", "한 줄기 빛이 여러 갈래로 갈라집니다. 아이디어가 쏟아집니다.", "당신은 이미 충분히 했습니다. 오늘은 칭찬받을 차례입니다.", "꺼지지 않는 열정, 혹은 꺼지지 않는 불만입니다. 어느 쪽이든 힘입니다."];
+function fortOf(id){return S.lang==='ko'?(FORT[id]||''):''}
+function quipShow(x){if(!x)return;const q=$('quip');q.textContent=x;q.classList.add('on');quipOn=true;quipT=3.6}
+function quitIdx(id){return((id*29+round.score)%71)+29}
+function wrapText(g,x,maxW){
+const lines=[];let cur='';
+const words=x.split(' ');
+for(let i=0;i<words.length;i++){const tst=cur?cur+' '+words[i]:words[i];if(g.measureText(tst).width>maxW&&cur){lines.push(cur);cur=words[i]}else cur=tst}
+if(cur)lines.push(cur);
+return lines;
+}
+function bestRushItem(){return round.items.slice().sort((a,b)=>(b.rar-a.rar)||((b.isNew?1:0)-(a.isNew?1:0)))[0]}
 const rushT=$('rushT'),rushS=$('rushS'),rushHud=$('rushHud');
 let rushShown=-1,rushScoreShown=-1;
 function rushHudUpdate(force){
@@ -2209,7 +2225,7 @@ const RANKN={ko:['인턴','사원','대리','과장','부장','이사','공장�
 function rankOf(sc){let r=0;for(let i=0;i<RANKT.length;i++)if(sc>=RANKT[i])r=i;return r}
 const chalScore=(()=>{const v=parseInt(new URLSearchParams(location.search).get('c'),10);return v>0&&v<=9999999?v:0})();
 function shareUrl(){return location.href.split(/[?#]/)[0]+'?c='+round.score}
-function shareText(){return t('shareText').replace('{n}',round.score.toLocaleString()).replace('{r}',RANKN[S.lang][rankOf(round.score)])}
+function shareText(){const b=bestRushItem();if(b&&fortOf(b.id))return t('shareText2').replace('{i}',ITEMS[b.id][S.lang]).replace('{f}',fortOf(b.id));return t('shareText').replace('{n}',round.score.toLocaleString()).replace('{r}',RANKN[S.lang][rankOf(round.score)])}
 function drawCard(){
 const W=1080,H=1350,c=document.createElement('canvas');c.width=W;c.height=H;
 const g=c.getContext('2d'),ff=getComputedStyle(document.body).fontFamily;
@@ -2221,17 +2237,20 @@ g.globalAlpha=1;g.textAlign='center';
 g.fillStyle='#ffd9a0';g.font='700 38px '+ff;g.fillText('W A X   B A L L   F A C T O R Y',W/2,120);
 g.fillStyle='#fff3d6';g.font='900 112px '+ff;g.fillText(t('title'),W/2,250);
 g.font='800 44px '+ff;g.fillStyle='#ffe3a3';g.fillText(t('rushTitle'),W/2,320);
-const best=round.items.slice().sort((a,b)=>b.rar-a.rar)[0];
+const best=bestRushItem();
 const d=best?ITEMS[best.id]:null,col=d?RAR[d.r].c:'#9aa7b8';
-g.fillStyle='rgba(20,10,34,.55)';g.beginPath();g.arc(W/2,640,250,0,TAU);g.fill();
+g.fillStyle='rgba(20,10,34,.55)';g.beginPath();g.arc(W/2,560,230,0,TAU);g.fill();
 g.lineWidth=14;g.strokeStyle=col;g.shadowColor=col;g.shadowBlur=40;g.stroke();g.shadowBlur=0;
-if(d){g.font='300px '+ff;g.fillStyle='#fff';g.fillText(d.e,W/2,715);g.font='800 46px '+ff;g.fillStyle=col;g.fillText(d[S.lang],W/2,950)}
-g.fillStyle='#fff3d6';g.font='900 190px '+ff;g.fillText(round.score.toLocaleString(),W/2,1130);
+if(d){
+g.font='270px '+ff;g.fillStyle='#fff';g.fillText(d.e,W/2,640);
+g.font='900 62px '+ff;g.fillStyle=col;g.fillText(d[S.lang],W/2,882);
+const fl=fortOf(best.id);
+if(fl){g.font='700 46px '+ff;g.fillStyle='#fff3d6';const ls=wrapText(g,'“'+fl+'”',900);for(let i=0;i<ls.length&&i<3;i++)g.fillText(ls[i],W/2,958+i*62)}
+g.font='800 40px '+ff;g.fillStyle='#ffd166';g.fillText(t('quitLbl').replace('{n}',quitIdx(best.id)),W/2,1170);
+}
 const rk=RANKN[S.lang][rankOf(round.score)];
-g.font='900 50px '+ff;const rw=g.measureText(rk).width+90;
-g.fillStyle='#e5573a';g.beginPath();g.roundRect(W/2-rw/2,1160,rw,76,38);g.fill();
-g.fillStyle='#fff';g.fillText(rk,W/2,1214);
-g.font='700 34px '+ff;g.fillStyle='#ffe3a3';g.fillText(t('cardCta'),W/2,1290);
+g.font='900 54px '+ff;g.fillStyle='#fff';g.fillText(round.score.toLocaleString()+t('rushScore')+' · '+rk,W/2,1240);
+g.font='700 34px '+ff;g.fillStyle='#ffe3a3';g.fillText(t('cardCta'),W/2,1305);
 return c;
 }
 function cardBlob(){return new Promise(res=>drawCard().toBlob(res,'image/png'))}
@@ -2274,6 +2293,7 @@ bus.on('reveal',()=>{
 if(round.mode!=='rush')return;
 const it=round.items[round.items.length-1],d=ITEMS[it.id],b=Math.round(([150,500,1500,4000][d.r]*(it.isNew?1.5:1))+250);
 rushAdd(b,true);
+quipShow(fortOf(it.id));
 });
 
 bus.on('done',()=>{});
@@ -2600,6 +2620,9 @@ Object.assign(I18N.ko,{rushBtn:'⚡ 60초 챌린지',rushBtnS:'⚡ 60초',rushAc
 Object.assign(I18N.en,{rushBtn:'⚡ 60-Second Challenge',rushBtnS:'⚡ 60s',rushAccept:'⚡ Accept Challenge',rushScore:'pts',rushTitle:'60-Second Challenge',shareBtn:'📤 Challenge a friend',copyBtn:'🔗 Copy link',saveImgBtn:'🖼 Save card',chalBanner:'🎯 A friend scored {n}. Can you beat it?',chalWin:'🎉 You beat their {n} by {d}',chalLose:'{d} short of their {n}',shareText:'Wax Ball Factory 60s challenge: {n} pts ({r}). Can you beat it?',newBest:'🏆 New personal best',bestScore:'Your best: {n}',linkCopied:'Copied. Paste it to send.',copyFail:'Could not copy.',cardCta:'Can you beat this?'});
 Object.assign(QUIP.ko,{rushStart:['탭해서 부수세요. 60초 안에 많이 꺼낼수록 고득점입니다.']});
 Object.assign(QUIP.en,{rushStart:['Tap to smash. The more you open in 60 seconds, the higher the score.']});
+
+Object.assign(I18N.ko,{tag:'이 왁스볼 안에 뭐가 들었을까요? 60초 안에 깨고 오늘의 판정을 받으세요.',rushBtn:'⚡ 60초 안에 깨기',shareText2:"왁스볼을 깼더니 '{i}' 나왔습니다. 판정: {f} 당신 건 뭐가 나올까요?",quitLbl:'오늘의 퇴사 지수 {n}%',cardCta:'당신 왁스볼엔 뭐가 들었을까요?',best:'오늘의 물건'});
+Object.assign(QUIP.ko,{rushStart:['탭하면 부숩니다. 안에 뭐가 들었을까요?']});
 
 boot();
 if(new URLSearchParams(location.search).get('debug')==='1')window.__wax={rushAdd,drawCard,shareUrl,shareText,startRush,rankOf,setItem,itemGroup,enterSlot,readSlot,setTitleView,titleView:()=>titleView,curSlot:()=>curSlot,curLv:()=>curLv,rollOrder,checkAch,ORD,tool:()=>curTool,photoOn:()=>photo.on,holdN:()=>holds.length,autoAssist,openMenu,claimDaily,brokenPopup,bossPopup,save,showRewardAd,ITEMS,toast,applyRoom,levelInfo,S,CONFIG,ball,state:()=>state,phase:()=>phase,combo,round,loose,startRound,debN:()=>debN,pointers,pressAt,releaseP,moveP,renderer,setState,selectTool,nextBall,info:()=>({tier:qTier,pr:prCur,fps:1000/fpsEMA,cpuMs:cpuEMA,cpuMax:cpuMax,resetCpu:()=>{cpuMax=0},left:ball.left,total:ball.total,debN,loose:loose.length,geo:renderer.info.memory.geometries,tex:renderer.info.memory.textures,calls:renderer.info.render.calls,tris:renderer.info.render.triangles})};
